@@ -1,4 +1,4 @@
-from djangosnippets.settings.base import *
+from ubuntusnippets.settings.base import *
 
 DEBUG = True
 

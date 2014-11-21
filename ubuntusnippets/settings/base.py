@@ -36,7 +36,7 @@ ABSOLUTE_URL_OVERRIDES = {
 
 FORCE_WWW = False
 
-ROOT_URLCONF = 'djangosnippets.urls'
+ROOT_URLCONF = 'ubuntusnippets.urls'
 
 CACHE_KEY_PREFIX = 'djangosnippets'
 CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_KEY_PREFIX
@@ -122,8 +122,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_USERNAME_MIN_LENGTH = 3
-ACCOUNT_ADAPTER = 'djangosnippets.adapters.DjangoSnippetsAccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'djangosnippets.adapters.DjangoSnippetsSocialAccountAdapter'
+ACCOUNT_ADAPTER = 'ubuntusnippets.adapters.DjangoSnippetsAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'ubuntusnippets.adapters.DjangoSnippetsSocialAccountAdapter'
 SOCIALACCOUNT_AUTO_SIGNUP = False
 
 LOGIN_REDIRECT_URL = '/'

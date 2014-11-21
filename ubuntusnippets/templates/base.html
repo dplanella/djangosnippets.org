@@ -1,7 +1,7 @@
 {% load static from staticfiles %}<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>djangosnippets: {% block head_title %}Home{% endblock %}</title>
+  <title>ubuntusnippets: {% block head_title %}Home{% endblock %}</title>
   <script src="{% static 'js/modernizr.js' %}"></script>
   <link rel="shortcut icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
@@ -23,7 +23,7 @@
     </p>
   </div></div>
   <header><div class="inner">
-    <a title="Go back to the frontpage" href="{% url 'home' %}" id="logo">django<b>snippets</b></a>
+    <a title="Go back to the frontpage" href="{% url 'home' %}" id="logo">ubuntu<b>snippets</b></a>
     <nav>
       <ul>
         <li><a href="{% url 'cab_snippet_add' %}">Add a snippet</a></li>
