@@ -6,6 +6,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono' rel='stylesheet' type='text/css' />
   <link rel="stylesheet" href="{% static "css/main.css" %}" type="text/css" />
   <link rel="alternate" href="{% url 'cab_feed_latest' %}" type="application/atom+xml" title="Feed of latest snippets" />
   {% block feeds %}{% endblock %}
@@ -18,7 +19,7 @@
     {% if user.is_authenticated %}
       Logged in as <a href="{{ user.get_absolute_url }}">{{ user.username }}</a> (<a href="{{ logout_url }}{% if request.path != login_url or request.path != logout_url %}?next={{ request.path }}{% endif %}">Logout</a>)
     {% else %}
-      <a href="{{ login_url }}?next={% if request.path == logout_url or request.path == login_url %}/{% else %}{{ request.path }}{% endif %}">Login</a>
+      <a href="{{ login_url }}?next={% if request.path == logout_url or request.path == login_url %}/{% else %}{{ request.path }}{% endif %}">Log in or register</a>
     {% endif %}
     </p>
   </div></div>
@@ -29,7 +30,7 @@
         <li><a href="{% url 'cab_snippet_add' %}">Add a snippet</a></li>
         <li><a href="{% url 'cab_snippet_list' %}">All snippets</a></li>
         <li><form method="GET" action="/search/">
-        <input type="search" name="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search a snippet...">
+        <input type="search" name="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search...">
       </form></li>
       </ul>
     </nav>
@@ -38,11 +39,11 @@
     {% block secondary_nav %}
     <nav id="subnav">
       <ul>
-        <li><a href="{% url 'cab_top_authors' %}">By author</a></li>
-        <li><a href="{% url 'cab_language_list' %}">By language</a></li>
-        <li><a href="{% url 'cab_top_tags' %}">By tag</a></li>
-        <li><a href="{% url 'cab_top_rated' %}">Highest rated</a></li>
-        <li><a href="{% url 'cab_top_bookmarked' %}">Most bookmarked</a></li>
+        <li><a href="{% url 'cab_top_rated' %}">Top rated</a></li>
+        <li><a href="{% url 'cab_top_bookmarked' %}">Popular</a></li>
+        <li><a href="{% url 'cab_top_authors' %}">Authors</a></li>
+        <li><a href="{% url 'cab_top_tags' %}">Tags</a></li>
+        <li><a href="{% url 'cab_language_list' %}">Languages</a></li>
       </ul>
     </nav>
     {% endblock %}
@@ -70,7 +71,7 @@
   </div>
 
   <footer>
-    <p id="copyright">Written by <a href="https://github.com/django-de/djangosnippets.org/graphs/contributors">various people</a>. Hosted by <a href="https://www.heroku.com" class="heroku">Heroku</a>, powered by <a href="http://www.djangoproject.com/">Django</a></p>
+    <p id="copyright">Based on the awesome <a href="https://github.com/django-de/djangosnippets.org">Djangosnippets</a> code.</p>
     <p class="legal"><a href="/about/">About</a> | <a href="/about/faq/">FAQ</a> | <a href="/about/tos/">Terms of service</a> | <a href="/about/legal/">Legal notices</a></p>
   </footer>
   {% block extra_body %}{% endblock %}

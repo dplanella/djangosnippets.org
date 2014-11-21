@@ -9,21 +9,21 @@
 {% block sidebar %}
   {% load cache %}
   {% cache 600 homepage %}
-  <h2>Latest snippets posted:</h2>
+  <h2>The latest</h2>
   <ul>
   {% for snippet in "cab.snippet"|latest:5 %}
     <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>) by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li>
   {% endfor %}
   </ul>
 
-  <h2>Top-rated snippets:</h2>
+  <h2>Top snippets</h2>
   <ol>
   {% for snippet in "cab.snippet"|call_manager:"top_rated"|slice:":5" %}
     <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>) by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.username }}</a></li>
   {% endfor %}
   </ol>
 
-  <h2>Top users:</h2>
+  <h2>Top users</h2>
   <ol>
   {% for author in "cab.snippet"|call_manager:"top_authors"|slice:":5" %}
     <li><a href="{{ author.get_absolute_url }}">{{ author.username }}</a></li>
