@@ -1,0 +1,12 @@
+{% extends "base_about.html" %}
+{% load markup %}
+
+{% block head_title %}{{ flatpage.title }}{% endblock %}
+
+{% block content_header %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+<div class="column">
+{{ flatpage.content|markdown }}
+</div>
+{% endblock %}

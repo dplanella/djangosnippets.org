@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Post a comment{% endblock %}
+{% block bodyclass %}with-sidebar{% endblock %}
+
+{% block content_header %}Post a comment{% endblock %}
+
+{% block content %}
+{% load safe_markup %}
+{{ form.non_field_errors }}
+
+
+<div class="bee-like-this">
+<dl>
+    {# A honeypot field called "name" #}
+    <dt><label for="id_name">{% trans "Your Name:" %}</label></dt>
+    <dd>{{ form.name.errors }}{{ form.name }}</dd>
+</dl>
+</div>
+
+<form action="/comments/post/" class="fullsize" method="post">{% csrf_token %}
+
+    <dl class="preview">
+        <dt>Username:</dt><dd><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></dd>
+        <dt>Comment:</dt><dd>{{ comment|safe_markdown:"safe"|safe }}</dd>
+    </dl>
+
+    <div class="field {% if form.comment.errors %}error{% endif %}">
+        <label for="id_comment">Comment:</label>
+        <div class="controls">{{ form.comment }}{{ form.comment.errors }}</div>
+    </div>
+
+    <div class="field {% if form.captcha.errors %}error{% endif %}">
+        <label for="id_captcha">{% trans "Captcha:" %}</label>
+        <div class="controls">{{ form.captcha }}{{ form.captcha.errors }}</div>
+    </div>
+
+    <div class="button-group"><div class="controls">
+        <button type="submit" name="preview">Preview comment</button>
+        <button type="submit" name="post">Post comment</button>
+    </div></div>
+
+    <div style="display:none;">
+      {{ form.honeypot }}
+      {{ form.content_type }}
+      {{ form.object_pk }}
+      {{ form.timestamp }}
+      {{ form.security_hash }}
+    </div>
+</form>
+
+{% endblock %}
+
+{% block sidebar %}
+<p>Here's what your comment will look like; if you're happy with it, go ahead and post, or feel free to edit and preview again.</p>
+<p>Remember that you can use Markdown syntax, but <strong>raw HTML will be removed</strong>.
+{% endblock %}
