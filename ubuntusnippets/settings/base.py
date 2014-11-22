@@ -53,14 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.bitbucket',
-    'allauth.socialaccount.providers.github',
-    'allauth.socialaccount.providers.twitter',
-
+    'django_openid_auth',
     'cab',
     'cab.comments',
     'comments_spamfighter',
@@ -94,8 +87,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
     # allauth specific context processors
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
 )
 
 TEMPLATE_LOADERS = (
@@ -126,6 +117,7 @@ ACCOUNT_ADAPTER = 'ubuntusnippets.adapters.DjangoSnippetsAccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'ubuntusnippets.adapters.DjangoSnippetsSocialAccountAdapter'
 SOCIALACCOUNT_AUTO_SIGNUP = False
 
+LOGIN_URL = '/openid/login/'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
@@ -153,9 +145,13 @@ RECAPTCHA_PRIVATE_KEY = '6LcXj_oSAAAAAFN31LR-F31lwFSQAcJgsg1pE5WP'
 RECAPTCHA_USE_SSL = True
 
 AUTHENTICATION_BACKENDS = (
-    'ratelimitbackend.backends.RateLimitModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    'django_openid_auth.auth.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
+
+# Create users automatically when a new OpenID is used
+OPENID_CREATE_USERS = True
+OPENID_SSO_SERVER_URL = 'https://login.ubuntu.com/'
 
 DISQUS_WEBSITE_SHORTNAME = 'djangosnippets'
 DISQUS_USE_SINGLE_SIGNON = True

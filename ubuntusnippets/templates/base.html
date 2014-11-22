@@ -14,6 +14,7 @@
 <body class="{% block bodyclass %}{% endblock %}">
   <div id="accountbar"><div class="inner">
     <p>
+<!--
     {% url 'account_logout' as logout_url %}
     {% url 'account_login' as login_url %}
     {% if user.is_authenticated %}
@@ -21,6 +22,13 @@
     {% else %}
       <a href="{{ login_url }}?next={% if request.path == logout_url or request.path == login_url %}/{% else %}{{ request.path }}{% endif %}">Log in or register</a>
     {% endif %}
+-->
+    {% if user.is_authenticated %}
+        <a href="{{ user.get_absolute_url }}">{{ user.username }}</a> | <a href="/logout">Log out</a>
+    {% else %}
+        <a href="/openid/login/?next={{request.path}}">Log in or register</a>
+    {% endif %}
+
     </p>
   </div></div>
   <header><div class="inner">

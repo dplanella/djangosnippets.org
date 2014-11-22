@@ -38,7 +38,7 @@ INSTALLED_APPS += ('gunicorn',)
 #SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ALLOWED_HOSTS = [
-    '*',
+    '91.189.93.90',
 #    'djangosnippets.org',
 #    'www.djangosnippets.org',
 ]

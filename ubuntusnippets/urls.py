@@ -8,6 +8,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^openid/', include('django_openid_auth.urls')),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^manage/', include(admin.site.urls)),
     url(r'^bookmarks/', include('cab.urls.bookmarks')),
     url(r'^comments/', include('django.contrib.comments.urls')),
