@@ -1,14 +1,25 @@
-Ubuntu snippets site
-====================
+# Ubuntu snippets site
 
 Experimental build of an Ubuntu snippets sharing site, based on the code
 that powers djangosnippets.org
 
+## Development setup
 
-Development setup
------------------
+### Install system requirements
 
-::
+For testing purposes on a local machine, it's recommended to run the 
+development server using virtualenv
+
+    sudo apt-get install python-dev virtualenv
+
+### Check out the code and set up the virtualenv
+
+    $ git clone git@github.com:dplanella/ubuntusnippets.git
+    $ cd ubuntusnippets
+    $ virtualenv .
+    $ source bin/activate
+
+### Install app requirements and run
     
     $ cd requirements
     $ pip install -r development.txt
@@ -26,11 +37,10 @@ are included in the fixtures folder::
     $ python manage.py loaddata fixtures/languages.json
 
 Now you should be able to use the development version of djangosnippets
-on port 8000.
+pointing your browser to http://localhost:8000.
 
 
-Styling contributor?
---------------------
+## Styling contributor?
 
 DjangoSnippets uses the Foundation_ framework as core of its visual style. To
 get this working on your local machine you need compass_ and bower_ to compile
@@ -50,8 +60,7 @@ Please make sure, that you commit only a compressed version of the CSS file
 as this is what will be deployed.
 
 
-Production setup
-----------------
+## Production setup
 
 The production setup is right now tailored to Heroku and therefore mostly
 automatic. The difference between these two setups is configured in
