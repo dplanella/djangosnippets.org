@@ -32,9 +32,6 @@ def delete_bookmark(request, snippet_id):
     bookmark = get_object_or_404(Bookmark,
                                  snippet__pk=snippet_id,
                                  user=request.user)
-    if request.method == 'POST':
-        bookmark.delete()
-        return redirect(bookmark.snippet)
-    else:
-        return render(request, 'cab/confirm_bookmark_delete.html',
-                      {'snippet': bookmark.snippet})
+    bookmark.delete()
+
+    return redirect(bookmark.snippet)

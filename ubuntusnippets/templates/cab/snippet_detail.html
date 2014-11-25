@@ -48,23 +48,23 @@
 
 <div class="one-col">
 
-<div class="vote">
-    {% if user.is_authenticated %}
-      {% url 'cab_snippet_rate' snippet_id=object.id as rate_url %}
-      {% with object|rating_score:request.user as rating_score %}
-        <li><a href="{{ rate_url }}?score={% if rating_score == 1 %}reset{% else %}up{% endif %}" title="Mark as useful"><i class="fa fa-fw fa-thumbs{% if rating_score != 1 %}-o{% endif %}-up"></i><span>Is useful</span></a></li>
-        <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
-        <li><a href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
-      {% endwith %}
-      {% if object|is_bookmarked:user %}
-        <li><a href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
-      {% else %}
-        <li><a href="{% url 'cab_bookmark_add' snippet_id=object.id %}" title="Bookmark"><i class="fa fa-star-o fa-fw"></i><span>Bookmark</span></a></li>
-      {% endif %}
+    <div class="vote">
+        {% if user.is_authenticated %}
+          {% url 'cab_snippet_rate' snippet_id=object.id as rate_url %}
+          {% with object|rating_score:request.user as rating_score %}
+            <li><a href="{{ rate_url }}?score={% if rating_score == 1 %}reset{% else %}up{% endif %}" title="Mark as useful"><i class="fa fa-fw fa-thumbs{% if rating_score != 1 %}-o{% endif %}-up"></i><span>Is useful</span></a></li>
+            <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
+            <li><a href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
+          {% endwith %}
+          {% if object|is_bookmarked:user %}
+            <li><a href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
+          {% else %}
+            <li><a href="{% url 'cab_bookmark_add' snippet_id=object.id %}" title="Bookmark"><i class="fa fa-star-o fa-fw"></i><span>Bookmark</span></a></li>
+          {% endif %}
+        {% endif %}
+        {{ object.bookmark_count }}
+    </div>
 
-    {% endif %}
-
-</div>
 </div>
 
 <div class="eleven-col last-col">
