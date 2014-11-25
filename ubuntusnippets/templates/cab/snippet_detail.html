@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_index.html" %}
 {% load cab_tags %}
 {% load cache %}
 {% load ratings_tags %}
@@ -11,7 +11,18 @@
 
 {% block content_header %}{{ object.title }}{% endblock %}
 
-{% block content %}<div class="columns large-12">
+{% block content %}
+
+<div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+		<h1>{{ object.title }}</h1>
+                
+	<div class="twelve-col">
+
+
+		<div class="box" id="description"><p class="smaller note">by <a href="{{ object.author.get_absolute_url }}">{{ object.author.username }}</a>, on {{ object.pub_date|date:"F j, Y" }}. Written in <a href="{{ object.language.get_absolute_url }}">{{ object.language.name }}</a>.</p>
+{{ object.description_html|safe }}</div>
+
+<!--
   <dl id="meta">
     <dt>Author:</dt>
     <dd><a href="{{ object.author.get_absolute_url }}">{{ object.author.username }}</a></dd>
@@ -26,10 +37,40 @@
     <dt>Score:</dt>
     <dd>{{ object.rating_score }} (after {{ object.ratings.count }} ratings)</dd>
   </dl>
+-->
+	</div>
+
+</div>
+
+<div class="row code-row no-padding-bottom">
+
+<div class="one-col">
+
+<div class="vote">
+    {% if user.is_authenticated %}
+      {% url 'cab_snippet_rate' snippet_id=object.id as rate_url %}
+      {% with object|rating_score:request.user as rating_score %}
+        <li><a href="{{ rate_url }}?score={% if rating_score == 1 %}reset{% else %}up{% endif %}" title="Mark as useful"><i class="fa fa-fw fa-thumbs{% if rating_score != 1 %}-o{% endif %}-up"></i><span>Is useful</span></a></li>
+        <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
+        <li><a href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
+      {% endwith %}
+      {% if object|is_bookmarked:user %}
+        <li><a href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
+      {% else %}
+        <li><a href="{% url 'cab_bookmark_add' snippet_id=object.id %}" title="Bookmark"><i class="fa fa-star-o fa-fw"></i><span>Bookmark</span></a></li>
+      {% endif %}
+
+    {% endif %}
+
+</div>
+</div>
+
+<div class="eleven-col last-col">
   <ul id="actions">
     {% if user.id == object.author.id %}
       <li><a href="{% url 'cab_snippet_edit' snippet_id=object.id %}" title="Edit"><i class="fa fa-fw fa-pencil"></i><span>Edit</span></a></li>
     {% endif %}
+    <!--
     {% if user.is_authenticated %}
       {% if object|is_bookmarked:user %}
         <li><a href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
@@ -42,14 +83,24 @@
         <li><a href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
       {% endwith %}
     {% endif %}
+    -->
+
     {% if user.is_authenticated %}
     <li><a class="actions__flag" href="{% url 'cab_snippet_flag' object.id %}" title="Flag this snippet"><i class="fa fa-fw fa-warning"></i><span>Flag this snippet</span></a></li>
     {% endif %}
     <li><a href="{% url 'cab_snippet_download' snippet_id=object.id %}" type="{{ object.language.mime_type }}" title="Download"><i class="fa fa-fw fa-arrow-circle-o-down"></i><span>Download</span></a></li>
     <li><a href="{% url 'cab_snippet_raw' snippet_id=object.id %}" title="Raw"><i class="fa fa-fw fa-align-left"></i><span>Raw</span></a></li>
   </ul>
-  <div id="description">{{ object.description_html|safe }}</div>
+
+  
   {{ object.highlighted_code|safe }}
+
+</div>
+</div>
+
+<div class="row no-border">
+<div class="twelve-col">
+
   <section id="more">
     <h2>More like this</h2>
     {% cache 600 mlt object.pk %}
@@ -62,6 +113,7 @@
       </ol>
     {% endcache %}
   </section>
+
   <section id="comments">
     <h2>Comments</h2>
     {% load comments %}
@@ -75,7 +127,13 @@
     </dl>
     {% render_comment_form for object %}
   </section>
+
+
+	</div>
+</div>
+
 {% endblock %}
+
 {% block sidebar %}{% endblock %}
 {% block extra_body %}
 {{ block.super }}

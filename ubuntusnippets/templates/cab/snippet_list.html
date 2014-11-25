@@ -1,12 +1,19 @@
-{% extends "base.html" %}
+{% extends "base_index.html" %}
 {% load core_tags %}
 {% load static from staticfiles %}
+
+<!--
 {% block bodyclass %}snippet-list{% endblock %}
 {% block head_title %}All snippets{% if months %} last {{ months }} months{% endif %}{% endblock %}
-
-{% block content_header %}All snippets{% if months %} last {{ months }} months{% endif %}{% endblock %}
+-->
 
 {% block content %}
+
+<div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+<h1>All snippets{% if months %} last {{ months }} months{% endif %}</h1>
+	<div class="ten-col">
+		
+
   {% if object_list %}
     <table class="snippet_list">
       <thead>
@@ -43,10 +50,9 @@
   {% else %}
     <p class="empty">No snippets posted yet.</p>
   {% endif %}
-{% endblock %}
 
-{% block sidebar %}
-  <nav class="filter">
+<div class="two-col">
+  <div class="filter">
     <h3>Filter by date</h3>
     <ul>
       <li{% if not months %} class="active"{% endif %}><a href="{{ request.path }}">Any time</a></li>
@@ -54,7 +60,12 @@
       <li{% if months == 6 %} class="active"{% endif %}><a href="{{ request.path }}?months=6">6 months</a></li>
       <li{% if months == 12 %} class="active"{% endif %}><a href="{{ request.path }}?months=12">1 year</a></li>
     </ul>
-  </nav>
+  </div>
 
   <p><a rel="alternate" href="{% url 'cab_feed_latest' %}" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i>Feed of latest snippets</a></p>
+</div>
+
+	</div>
+</div>
+
 {% endblock %}

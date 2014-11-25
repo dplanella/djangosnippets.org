@@ -10,7 +10,7 @@ that powers djangosnippets.org
 For testing purposes on a local machine, it's recommended to run the 
 development server using virtualenv
 
-    sudo apt-get install python-dev virtualenv
+    sudo apt-get install python-dev virtualenv ruby-compass
 
 ### Check out the code and set up the virtualenv
 
@@ -42,30 +42,25 @@ pointing your browser to http://localhost:8000.
 
 ## Styling contributor?
 
-DjangoSnippets uses the Foundation_ framework as core of its visual style. To
-get this working on your local machine you need compass_ and bower_ to compile
-your stylesheets. Please **never** modify the generated .css files directly
-but use the .scss ones.
+DjangoSnippets uses the [Ubuntu Web Style Guide](http://design.ubuntu.com/web-style-guide)
+as core of its visual style.
 
-To keep the setup path as short as possible, simply run following commands
-in your terminal::
+Any additional local styles are added using SASS syntax and compiled into the
+final stylesheets using [compass](http://compass-style.org). Please modify
+only the .scss source files in `ubuntusnippets/static/scss`, as the generated
+.css files will be overwritten on each compass run.
+
+To generate the CSS, simply run following commands in your terminal:
     
-    $ cd djangosnippets/static
-    $ bower install && compass watch
+    $ cd ubuntusnippets/static
+    $ compass watch
 
-If you don't have either of these two installed, you can find detailed
-instructions on their respective websites.
+It is recommended that for the sake of production deployments you commit the 
+compressed version of the CSS files. Here's an example, but 
+[you can do this in different ways](http://compass-style.org/help/tutorials/production-css/):
 
-Please make sure, that you commit only a compressed version of the CSS file
-as this is what will be deployed.
-
+    $ compass compile -e production --force
 
 ## Production setup
 
-The production setup is right now tailored to Heroku and therefore mostly
-automatic. The difference between these two setups is configured in
-the djangosnippets.settings.production module and the requirements.txt.
-
-.. _bower: http://bower.io/
-.. _compass: http://compass-style.org/install/
-.. _foundation: http://foundation.zurb.com/
+The recommended production setup uses gunicorn, nginx and elasticsearch.

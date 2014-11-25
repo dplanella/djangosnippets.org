@@ -1,257 +1,9 @@
-$green: #316241;
-$orange: #ffc656;
-$black: #333;
-$grey: #888;
-$ubuntuorange: #dd4814;
-$red: #CE2929;
-$primary-color: #555;
-$secondary-color: $grey;
-
-// We don't need everything from foundation but still want to be able
-// to use certain mixins:
-$include-html-classes: false;
-$include-html-visibility-classes: true;
-$include-html-form-classes: true;
-$include-html-grid-classes: true;
-$include-html-table-classes: true;
-$include-html-alert-classes: true;
-$include-html-button-classes: true;
-$include-html-global-classes: true;
-$include-html-type-classes: true;
-
-@import "normalize";
-@import "foundation";
-@import "forms";
 @import "pygments";
 
-$font-stack: Ubuntu, Arial, 'libra sans', sans-serif;
+$ubuntu-code-color: #FDF6F2;
+$table-border-color: #dddddd;
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: $font-stack;
-    line-height: 1.3;
-}
-
-header > .inner, footer, #main {
-    @include grid-row("collapse");
-    margin: auto;
-}
-
-a {
-    color: $ubuntuorange;
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-#subnav {
-    margin-top: -40px;
-    margin-right: 0.9375rem;
-    ul {
-        list-style: none;
-        @media #{$small-up} {
-            text-align: center;
-        }
-        @media #{$large-up} {
-            background: #FAFAFA;
-            text-align: right;
-            float: right;
-            border-radius: 0 0 20px 20px;
-        }
-    }
-    li {
-        display: inline-block;
-        padding: 10px 15px;
-    }
-    a {
-        font-size: rem-calc(12px);
-    }
-    &:after {
-        content: "\0020";
-        clear: both;
-        display: block;
-        overflow: hidden;
-        height: 0px;
-    }
-}
-
-header {
-    padding-bottom: 20px;
-    padding-top: 20px;
-    margin-bottom: 40px;
-    background: #FAFAFA;
-    #logo {
-        @media #{$small-up} {
-            @include grid-column(12, $last-column: true);
-            text-align: center;
-        }
-        @media #{$large-up} {
-            @include grid-column(4);
-            text-align: left;
-        }
-        font-size: rem-calc(40px);
-        text-transform: lowercase;
-        font-weight: 300;
-        line-height: rem-calc(50px);
-        color: $ubuntuorange;
-        b {
-            font-weight: 400;
-            color: $secondary-color;
-        }
-        &:hover {
-            text-decoration: none;
-        }
-    }
-    .inner > nav {
-        @media #{$small} {
-            @include grid-column(12, $last-column: true);
-        }
-        @media #{$large-up} {
-            @include grid-column(8);
-        }
-        line-height: 50px;
-        text-transform: lowercase;
-        font-family: $font-stack;
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            @media #{$small-up} {
-                text-align: center;
-            }
-            @media #{$large-up} {
-                text-align: right;
-            }
-        }
-        li {
-            display: inline-block;
-            line-height: rem-calc(50px);
-            vertical-align: middle;
-            &:after {
-                content: '/';
-                display: inline-block;
-                padding: 0 10px;
-                color: $secondary-color;
-            }
-            &:last-child:after {
-                display: none;
-            }
-        }
-        form {
-            display: inline;
-            input {
-                margin-bottom: 0;
-            }
-        }
-    }
-}
-
-#accountbar {
-    background: #EFEFEF;
-    width: 100%;
-    > .inner {
-        @include grid-row();
-    }
-
-    p {
-        @include grid-column(12);
-        padding-top: 5px;
-        padding-bottom: 5px;
-        margin: auto;
-        font-size: rem-calc(12px);
-        color: #666;
-        text-align: right;
-    }
-    a {
-        color: lighten($primary-color, 30);
-    }
-}
-
-#content {
-    @include grid-column(12, $collapse: true);
-    font-size: rem-calc(15px);
-    ul, ol, p {
-        font-size: rem-calc(15px);
-    }
-    table {
-        width: 100%;
-        tr:hover td {
-            background: lighten($secondary-color, 30);
-        }
-        &.highlighttable tr:hover td {
-            background: inherit;
-        }
-    }
-}
-
-#sidebar {
-    h2, h3 {
-        font-size: rem-calc(22px);
-    }
-    p, dt, dd, li {
-        font-size: rem-calc(13px);
-    }
-    .filter {
-        ul {
-            list-style: none;
-            margin-left: 0;
-        }
-        li {
-            border-left: 5px solid lighten($primary-color, 40);
-            padding-left: 10px;
-            margin-bottom: 3px;
-            &:hover {
-                border-color: lighten($secondary-color, 0);
-            }
-        }
-    }
-}
-h1 {
-    @include grid-column(12);
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: rem-calc(24px);
-}
-
-.message {
-    @include grid-column(12);
-    margin-bottom: 20px;
-    background: $green;
-    color: #FFF;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    &.message_error {
-        background: $red;
-    }
-}
-
-#meta {
-    opacity: 0.6;
-    &:hover {
-        opacity: 1;
-    }
-    dd, dt {
-        display: inline-block;
-        font-size: rem-calc(12px);
-    }
-    dd {
-        margin-right: 10px;
-    }
-}
-
-#description {
-    padding: 15px;
-    background: lighten($table-border-color, 10);
-    border-left: 1px solid $table-border-color;
-    border-right: 1px solid $table-border-color;
-    p:last-child {
-        margin-bottom: 0;
-    }
-}
+header.banner .nav-primary ul.right { float: right; }
 
 body.snippet-details {
     h1 {
@@ -259,6 +11,10 @@ body.snippet-details {
     }
     #meta {
         margin-bottom: 20px;
+    }
+    .code-row {
+        margin-top: 0px;
+        padding-top: 0px;
     }
     table {
         border-top: 0;
@@ -268,13 +24,20 @@ body.snippet-details {
         }
         td {
             vertical-align: top;
+            text-align: left;
+            padding: 0;
+            border: 0;
+            background: $ubuntu-code-color;
         }
     }
     .highlighttable .code > div {
-        overflow: scroll;
+        overflow: auto;
     }
     .highlight pre {
         white-space: pre;
+    }
+    div.highlight {
+        background: $ubuntu-code-color;
     }
     #actions {
         background: $table-border-color;
@@ -283,9 +46,10 @@ body.snippet-details {
         margin: 0;
         li {
             display: inline-block;
+            margin-bottom: 0;
         }
         a {
-            font-size: rem-calc(18px);
+            font-size: 1.125rem;
             display: inline-block;
             padding: 5px 10px;
             color: darken($table-border-color, 30);
@@ -298,113 +62,31 @@ body.snippet-details {
             }
         }
     }
-}
-
-body.snippet-list,
-body.snippet-form,
-body.tags-list,
-body.search,
-body.bookmarks,
-body.user,
-body.snippet-list,
-body.with-sidebar {
-    #content {
-        @media #{$small-up} {
-            @include grid-column(12);
-        }
-        @media #{$medium-up} {
-            @include grid-column(8);
-        }
-    }
-    #sidebar {
-        @media #{$small-up} {
-            @include grid-column(12);
-        }
-        @media #{$medium-up} {
-            @include grid-column(4);
-        }
-    }
-    .pagination, .count {
+    .vote {
         text-align: center;
-    }
-}
-
-body.frontpage,  {
-    #content, #sidebar {
-        @media #{$small-up} {
-            @include grid-column(12, $last-column: true);
-        }
-        @media #{$medium-up} {
-            @include grid-column(6);
-        }
-    }
-    #sidebar {
-        ul, ol, p {
-            font-size: rem-calc(15px);
-        }
-    }
-}
-
-body.simple {
-    h1 {
-        text-align: center;
-    }
-    h1, #content {
-        @media #{$small-up} {
-            @include grid-column(12);
-        }
-        @media #{$medium-up} {
-            @include grid-column(8, $center:true);
-        }
-    }
-}
-
-body {
-    font-family: $font-stack;
-    font-weight: 300;
-    color: $black;
-}
-
-footer {
-    padding: 30px 0 30px 0;
-    clear: both;
-    p {
-        text-align: center;
-        font-size: rem-calc(13px);
-        opacity: 0.8;
-        padding: 0;
+        list-style: none;
         margin: 0;
-        vertical-align: middle;
-        line-height: 31px;
-    }
-    .heroku {
-        background: url(../img/heroku-logo.png) 50% 50% no-repeat;
-        display: inline-block;
-        width: 88px;
-        height: 31px;
-        color: transparent;
-    }
-}
-
-.ui-dialog {
-    padding: 0;
-    border-radius: 0;
-
-    > .ui-widget-header {
-        background: #ddd;
-        border-radius: 0;
-        border: none;
-    }
-}
-
-.socialaccount_providers {
-    margin-left: 0;
-}
-
-.socialaccount_providers li {
-    list-style: none;
-}
-
-a.button:hover {
-    text-decoration: none;
+        li {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        a {
+            font-size: 2em;
+            display: inline-block;
+            padding: 5px 10px;
+            color: #919191;
+            text-transform: lowercase;
+            &:hover {
+                color: #5e5e5e;
+            }
+        }
+        span {
+            display: none;
+        }
+        #score {
+            font-size: 2em;
+            padding: 5px 10px;
+            color: #919191;
+        }
+    }    
 }

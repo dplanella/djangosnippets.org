@@ -1,97 +1,131 @@
 {% load static from staticfiles %}<!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en" dir="ltr"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" dir="ltr"> <!--<![endif]-->
 <head>
+
   <title>ubuntusnippets: {% block head_title %}Home{% endblock %}</title>
+  <meta charset="UTF-8" />
+  <meta name="description" content="{% block meta_description %}{% endblock %}" />
+  <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
+  <meta name="author" content="Canonical" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!--[if IE]>
+  <meta http-equiv="X-UA-Compatible" content="IE=8">
+  <![endif]-->
+
+  <link rel="shortcut icon" href="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" type="image/x-icon" />
+  <!-- <link type="text/plain" rel="author" href="{{ STATIC_URL }}files/humans.txt" /> -->
+
+  <!-- get ubuntu font from google -->
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono' rel='stylesheet' type='text/css' />
+
+  <!-- get ubuntu guidelines css -->
+  <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/responsive/latest/ubuntu-styles.css" />
+
+  <!-- get global nav css -->
+  <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/beta/global-responsive.css" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/main.css" />
+
+<!-- site specific css -->
+<!--
+<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/styles.css" />
+<link rel="stylesheet" type="text/css" media="print" href="{{ STATIC_URL }}css/core-print.css" />
+-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/ie/ie7.scss" />
+  <link rel="stylesheet" type="text/css" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+  <![endif]-->
+
+  <!-- modernizr -->
+  <!-- <script src="{{ STATIC_URL }}js/plugins/modernizr.2.7.1.js"></script> -->
+
   <script src="{% static 'js/modernizr.js' %}"></script>
-  <link rel="shortcut icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
+
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono' rel='stylesheet' type='text/css' />
+<!--
   <link rel="stylesheet" href="{% static "css/main.css" %}" type="text/css" />
+-->
   <link rel="alternate" href="{% url 'cab_feed_latest' %}" type="application/atom+xml" title="Feed of latest snippets" />
   {% block feeds %}{% endblock %}
+
+{% block head_extra %}{% endblock %}
+
 </head>
-<body class="{% block bodyclass %}{% endblock %}">
-  <div id="accountbar"><div class="inner">
-    <p>
-<!--
-    {% url 'account_logout' as logout_url %}
-    {% url 'account_login' as login_url %}
-    {% if user.is_authenticated %}
-      Logged in as <a href="{{ user.get_absolute_url }}">{{ user.username }}</a> (<a href="{{ logout_url }}{% if request.path != login_url or request.path != logout_url %}?next={{ request.path }}{% endif %}">Logout</a>)
-    {% else %}
-      <a href="{{ login_url }}?next={% if request.path == logout_url or request.path == login_url %}/{% else %}{{ request.path }}{% endif %}">Log in or register</a>
-    {% endif %}
--->
-    {% if user.is_authenticated %}
-        <a href="{{ user.get_absolute_url }}">{{ user.username }}</a> | <a href="/logout">Log out</a>
-    {% else %}
-        <a href="/openid/login/?next={{request.path}}">Log in or register</a>
-    {% endif %}
 
-    </p>
-  </div></div>
-  <header><div class="inner">
-    <a title="Go back to the frontpage" href="{% url 'home' %}" id="logo">ubuntu<b>snippets</b></a>
-    <nav>
-      <ul>
-        <li><a href="{% url 'cab_snippet_add' %}">Add a snippet</a></li>
-        <li><a href="{% url 'cab_snippet_list' %}">All snippets</a></li>
-        <li><form method="GET" action="/search/">
-        <input type="search" name="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search...">
-      </form></li>
-      </ul>
+<body class="{% block bodyclass %}{% endblock %} {% if level_1 != "" %}{% if level_1 == '2012' %}body-{% endif %}{{ level_1 }}{% endif %}{% if level_2 %} {% if level_1 == '2012' %}body-{% endif %}{{ level_1 }}-{{ level_2 }}{% endif %}{% if level_3 %} {% if level_1 == '2012' %}body-{% endif %}{{ level_1 }}-{{ level_2 }}-{{ level_3 }} {% endif %} {% include "templates/body-class.html" %}{% if extra_body_class != "" %} {% block extra_body_class %}{% endblock %}{% endif %}" itemscope itemtype="http://schema.org/Product">
+
+<header class="banner global" role="banner">
+{% block header_banner %}
+    <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+            <a class="logo-ubuntu" href="/">
+                <img width="106" height="25" alt="" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.svg">
+                <span>snippets</span>
+            </a>
+        </div>
+        <ul>
+            <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+                        <!-- FIXME fix the slugs here to make the section active -->
+            <li><a{% if level_1 == 'partnering-with-us' %} class="active"{% endif %} href="{% url 'cab_snippet_list' %}">Browse</a></li>
+            <li><a{% if level_1 == 'find-a-partner' %} class="active"{% endif %} href="{% url 'cab_snippet_add' %}">Submit</a></li>
+        </ul>
+
+        <ul class="right inline">
+        {% if user.is_authenticated %}
+            <li><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></li>
+            <li><a href="/logout">Sign out</a></li>
+        {% else %}
+            <li><a href="/openid/login/?next={{request.path}}">Sign in or register</a></li>
+        {% endif %}
+        
+        <form class="header-search" method="get" action="/search/">
+            <label class="off-left" for="q">Search:</label>
+            <input type="search" autocomplete="off" name="q" id="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search">
+            <button type="submit"><img src="//assets.ubuntu.com/sites/ubuntu/1218/u/img/search-white.svg" alt="Search" height="28" /></button>
+        </form>
+
+       </ul>
+
+        <a href="#canonlist" class="nav-toggle no-script">☰</a>
     </nav>
-  </div></header>
-  <div id="main">
-    {% block secondary_nav %}
-    <nav id="subnav">
-      <ul>
-        <li><a href="{% url 'cab_top_rated' %}">Top rated</a></li>
-        <li><a href="{% url 'cab_top_bookmarked' %}">Most popular</a></li>
-        <li><a href="{% url 'cab_top_authors' %}">Authors</a></li>
-        <li><a href="{% url 'cab_top_tags' %}">Tags</a></li>
-        <li><a href="{% url 'cab_language_list' %}">Languages</a></li>
-      </ul>
-    </nav>
-    {% endblock %}
+{% endblock header_banner %}
+</header>
 
-  {% if messages %}
-    {% for message in messages %}
-      <div data-alert class="alert-box {% if message.tags %} {{ message.tags }}{% else %}message_info{% endif %}">
-        {{ message }}
-        <a href="#" class="close">&times;</a>
-      </div>
-    {% endfor %}
-  {% endif %}
+<div class="wrapper">
+<div id="main-content" class="inner-wrapper">
+{% if level_1 %}
+  {% block second_level_nav %}
+    {% spaceless %}{% block second_level_nav_items %}{% endblock second_level_nav_items %}{% endspaceless %}
+  {% endblock second_level_nav %}
+{% endif %}
 
-  <h1>{% block content_header %}{% endblock %}</h1>
-  <div id="content">
-      {% block content %}
-      {% endblock %}
-  </div>
-  <div id="sidebar">
-    {% block sidebar %}
-    {% endblock %}
-  </div>
-  {% block extra_content %}
-  {% endblock %}
-  </div>
+{% block header %}{% endblock %}
+{% block content_container %}
+{% block outer_content %}
+{% endblock outer_content %}
+{% endblock content_container %}
+</div><!-- /.inner-wrapper -->
 
-  <footer>
-    <p id="copyright">Based on the awesome <a href="https://github.com/django-de/djangosnippets.org">Djangosnippets</a> code.</p>
-    <p class="legal"><a href="/about/">About</a> | <a href="/about/faq/">FAQ</a> | <a href="/about/tos/">Terms of service</a> | <a href="/about/legal/">Legal notices</a></p>
-  </footer>
-  {% block extra_body %}{% endblock %}
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="{% static 'js/fastclick.js' %}"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-  <script src="{% static 'js/foundation.min.js' %}"></script>
-  <script src="{% static 'js/snippets.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-  <script>
-    $(document).foundation();
-  </script>
-  {% block extra_scripts %}{% endblock %}
-</body>
+</div><!-- /.wrapper -->
+
+{% include "templates/footer.html" %}
+
+<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/plugins/yui-combined.min.js"></script>
+<script>
+	if(!core){ var core = {}; }
+	core.globalPrepend = 'body';
+</script>
+<script src="//assets.ubuntu.com/sites/guidelines/js/responsive/core.js"></script>
+<!--<script src="{{ STATIC_URL }}js/scratch.js"></script> -->
+<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+<!-- <script src="{{ STATIC_URL }}js/plugins/respond.min.js"></script> -->
+
+{% block footer_extra %}{% endblock %}
+
 </html>

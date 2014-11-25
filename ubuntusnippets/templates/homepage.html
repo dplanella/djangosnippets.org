@@ -1,44 +1,57 @@
-{% extends "base.html" %}
+{% extends "base_index.html" %}
 {% load static from staticfiles %}
 {% load core_tags %}
+<!--
 {% block bodyclass %}frontpage{% endblock %}
 {% block head_title %}Welcome{% endblock %}
 
 {% block content_header %}Share your code{% endblock %}
+--> 
+{% block content %}
+<div class="row row-hero no-border vertical-divider">
+<h1>Share your code</h1>
+	<div class="six-col">
+		
 
-{% block sidebar %}
-  {% load cache %}
+		<p>Welcome to the Ubuntu developer snippets site, where you can share and find useful snippets of reusable code.</p>
+
+		<p>If you're just here to browse, you can look through snippets organized <a href="/users/">by author</a>, <a href="/languages/">by language</a> or <a href="/tags/">by tag</a>. You can also have a look at the <a href="/popular/rated/">top rated snippets</a> and the <a href="/popular/bookmarked/">most popular snippets</a>.</p>
+
+	<p>If you'd like to contribute, you can sign up for a free account</a> and you'll be able to post snippets of your own, rate and bookmark snippets, and post comments.
+
+	<p class="clear six-col"><a href="/openid/login" class="link-cta-ubuntu">Sign up</a> or <a href="/snippets">browse our snippets&nbsp;&rsaquo;</a></p>
+
+	</div>
+
+       <div class="six-col last-col">
+	  {% load cache %}
   {% cache 600 homepage %}
-  <h2>The latest</h2>
+  <h3>The latest</h3>
   <ul>
   {% for snippet in "cab.snippet"|latest:5 %}
     <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>) by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li>
   {% endfor %}
   </ul>
 
-  <h2>Top snippets</h2>
+  <h3>Top snippets</h3>
   <ol>
   {% for snippet in "cab.snippet"|call_manager:"top_rated"|slice:":5" %}
     <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>) by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.username }}</a></li>
   {% endfor %}
   </ol>
 
-  <h2>Top users</h2>
+  <h3>Top users</h3>
   <ol>
   {% for author in "cab.snippet"|call_manager:"top_authors"|slice:":5" %}
     <li><a href="{{ author.get_absolute_url }}">{{ author.username }}</a></li>
   {% endfor %}
   </ol>
   {% endcache %}
-{% endblock %}
 
-{% block content %}
-  <p>Welcome to the Ubuntu developer snippets site, where you can share and find useful snippets of reusable code.</p>
+<p><a rel="alternate" href="/feeds/latest/" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i> Subscribe to the latest snippets</a></p>
+       </div>
+</div>
 
-  <p>If you're just here to browse, you can look through snippets organized <a href="{% url 'cab_top_authors' %}">by author</a>, <a href="{% url 'cab_language_list' %}">by language</a> or <a href="{% url 'cab_top_tags' %}">by tag</a>. You can also have a look at the <a href="{% url 'cab_top_rated' %}">top-rated snippets</a> and the <a href="{% url 'cab_top_bookmarked' %}">most-bookmarked snippets</a>.</p>
+{% endblock content %}
 
-  <p>If you'd like to contribute, <a href="/openid/login">sign up for a free account</a> and you'll be able to post snippets of your own, rate and bookmark snippets, and post comments. If you've got any questions, have a look at our <a href="/about/faq/">FAQ</a>.</p>
 
-  <p><a rel="alternate" href="{% url 'cab_feed_latest' %}" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i> Latest snippets</a></p>
-
-{% endblock %}

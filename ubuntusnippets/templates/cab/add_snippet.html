@@ -1,4 +1,4 @@
-{% extends "base_user.html" %}
+{% extends "base_index.html" %}
 {% load static from staticfiles %}
 
 {% block extra_scripts %}
@@ -13,42 +13,81 @@
 
 {% block head_title %}Add a snippet{% endblock %}
 
-{% block content_header %}Add a snippet{% endblock %}
-
 {% block content %}
-  <p class="alert-box warning">Please remember that this site is not a pastebin or debugging tool; it is intended for finished, working pieces of code.</p>
-  <p>If you need someplace to temporarily post some code while others help you debug it, please use the pastebin at <a href="http://dpaste.org/">dpaste.org</a>.</p>
+
+<div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+<h1>Add a snippet</h1>
+	<div class="eight-col">
+		
 
   {% if form.errors %}
-    <p class="error">Please correct the errors below:</p>
+    <p class="error">Please correct the errors below: </p>
   {% endif %}
 
   <form method="post" action="">{% csrf_token %}
-    <dl>
-      <dt><label for="id_title">Title: {% if form.title.errors %}<span class="error">{{ form.title.errors|join:", " }}</span>{% endif %}</label></dt>
-      <dd>{{ form.title }}</dd>
-      <dt><label for="id_language">Language:</label></dt>
-      <dd>{{ form.language }}{% if form.language.errors %}<span class="error">&nbsp;&nbsp;{{ form.language.errors|join:", " }}</span>{% endif %}</dd>
-      <dt><label for="id_version">Version:</label></dt>
-      <dd>{{ form.version }}{% if form.version.errors %}<span class="error">&nbsp;&nbsp;{{ form.version.errors|join:", " }}</span>{% endif %}</dd>
-      <dt><label for="id_tag_list">Tags: {% if form.tag_list.errors %}<span class="error">{{ form.tag_list.errors|join:", " }}</span>{% endif %} </label></dt>
-      <dd>{{ form.tags }} <br />Use commas between tag names, and hyphens for multiple words, like "tag1, tag2, tag3-with-long-name"</dd>
-      <dt><label for="id_code">Code: {% if form.code.errors %}<span class="error">{{ form.code.errors|join:", " }}</span>{% endif %}</label></dt>
-      <dd>{{ form.code }}</dd>
-      <dt><label for="id_description">Description: {% if form.description.errors %}<span class="error">{{ form.description.errors|join:", " }}</span>{% endif %}</label></dt>
-      <dd>{{ form.description }}<br />
-      You can use Markdown syntax here (see the sidebar), but <strong>raw HTML will be removed</strong>.</dd>
-      <dt><button type="submit">Save</button></dt>
-    </dl>
-  </form>
-{% endblock %}
 
-{% block sidebar %}
-  <p>All fields are required; tags should be separated with spaces, and you can use Markdown in the description for your snippet, but <strong>raw HTML will be removed</strong>.</p>
+ <fieldset>
+   <ul>
 
-  <p>Remember: by posting a snippet, you agree to let anyone make use of the code.</p>
+    <li>
+     <!-- Snippet title -->
+     <label for="id_title">Title: {% if form.title.errors %}<span class="error">{{ form.title.errors|join:", " }}</span>{% endif %}</label>
+     <input name="title" id="id_title" type="text" tabIndex="1" value=""/>
+    </li>
 
-  <h3>Markdown quick reference:</h3>
+    <li>
+     <!-- Snippet code -->
+     <label for="id_code">Code: {% if form.code.errors %}<span class="error">{{ form.code.errors|join:", " }}</span>{% endif %}</label>
+     <textarea name="code" id="id_code" type="text" cols="20" rows="6" tabIndex="2" value=""></textarea>
+    </li>
+
+    <li>
+     <!-- Snippet description -->
+     <label for="id_description">Description: {% if form.description.errors %}<span class="error">{{ form.description.errors|join:", " }}</span>{% endif %}</label>
+     <textarea name="description" id="id_description" cols="20" rows="2" tabIndex="3" value=""></textarea>
+    </li>
+
+    <li>
+     <!-- Snippet language -->
+     <label for="id_language">Language: {% if form.language.errors %}<span class="error">&nbsp;&nbsp;{{ form.language.errors|join:", " }}</span>{% endif %}</label>
+     {{ form.language }}
+    </li>
+
+    <li>
+     <!-- Snippet version -->
+     <label for="id_version">Version: {% if form.version.errors %}<span class="error">&nbsp;&nbsp;{{ form.version.errors|join:", " }}</span>{% endif %}</label>
+     {{ form.version }}
+
+    <li>
+
+     <!-- Snippet tags -->
+     <label for="id_tags">Tags: {% if form.tags.errors %}<span class="error">{{ form.tags.errors|join:", " }}</span>{% endif %} </label>
+      {{ form.tags }}
+    </li>
+   </ul>
+ </fieldset>
+
+ <fieldset class="fieldset-submit">
+  <ul>
+   <li> Please remember that this site is not a pastebin or debugging tool; it is intended for finished, working pieces of code. If you need to temporarily post some code while others help you debug it, please use the <a href="http://pastebin.ubuntu.com">Ubuntu Pastebin</a>.</li>
+   <li>
+    <input type="submit" value="Submit" tabindex="5">
+   </li> 
+  </ul>
+ </fieldset>
+</form>
+
+	</div>
+	<div class="four-col last-col">
+
+<div class="box">
+  <ul>
+  <li>All fields are required</li>
+  <li>Separate tags with spaces</li>
+  <li>You can use Markdown in the description for your snippet, but <strong>raw HTML will be removed</strong>.</li>
+  </ul>
+
+  <h3>Markdown quick ref:</h3>
     <dl>
     <dt>Bold and italic text:</dt>
     <dd><strong>**bold**</strong> and <em>*italic*</em> text</dd>
@@ -74,5 +113,9 @@
     <dt></dt>
     <dd></dd>
   </dl>
+</div>
+
+	</div>
+</div>
 
 {% endblock %}
