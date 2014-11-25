@@ -338,15 +338,73 @@ div.highlight .il {
 }
 
 /* Literal.Number.Integer.Long */
-/* line 6, ../scss/main.scss */
+/* line 5, ../scss/_tags.scss */
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+/* line 10, ../scss/_tags.scss */
+.tags li {
+  float: left;
+}
+
+/* line 15, ../scss/_tags.scss */
+.tag {
+  background: #eeeeee;
+  border-radius: 3px 0 0 3px;
+  color: #999;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+/* line 27, ../scss/_tags.scss */
+.tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+/* line 38, ../scss/_tags.scss */
+.tag::after {
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #eeeeee;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* line 48, ../scss/_tags.scss */
+.tag:hover {
+  color: #dd4814;
+}
+/* line 52, ../scss/_tags.scss */
+.tag hover::after {
+  border-left-color: black;
+}
+/* line 55, ../scss/_tags.scss */
+.tag a:link, .tag a:visited {
+  color: #333333;
+}
+
+/* line 7, ../scss/main.scss */
 header.banner .nav-primary ul.right {
   float: right;
 }
 
-/* line 9, ../scss/main.scss */
-body.snippet-details h1 {
-  margin-bottom: 0;
-}
 /* line 12, ../scss/main.scss */
 body.snippet-details #meta {
   margin-bottom: 20px;
@@ -436,8 +494,8 @@ body.snippet-details .vote a {
 body.snippet-details .vote a:hover {
   color: #5e5e5e;
 }
-/* line 83, ../scss/main.scss */
-body.snippet-details .vote span {
+/* line 82, ../scss/main.scss */
+body.snippet-details .vote a span {
   display: none;
 }
 /* line 86, ../scss/main.scss */

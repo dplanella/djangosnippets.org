@@ -1,14 +1,14 @@
 @import "pygments";
+@import "tags";
 
 $ubuntu-code-color: #FDF6F2;
 $table-border-color: #dddddd;
 
-header.banner .nav-primary ul.right { float: right; }
+header.banner .nav-primary ul.right {
+    float: right;
+}
 
 body.snippet-details {
-    h1 {
-        margin-bottom: 0;
-    }
     #meta {
         margin-bottom: 20px;
     }
@@ -79,9 +79,9 @@ body.snippet-details {
             &:hover {
                 color: #5e5e5e;
             }
-        }
-        span {
-            display: none;
+            span {
+                display: none;
+            }
         }
         #score {
             font-size: 2em;
