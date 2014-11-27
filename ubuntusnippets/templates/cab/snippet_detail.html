@@ -48,22 +48,34 @@
 
 <div class="one-col">
 
-    <div class="vote">
+    <ul class="vote">
         {% if user.is_authenticated %}
           {% url 'cab_snippet_rate' snippet_id=object.id as rate_url %}
+          {# Vote up/down #}
           {% with object|rating_score:request.user as rating_score %}
             <li><a href="{{ rate_url }}?score={% if rating_score == 1 %}reset{% else %}up{% endif %}" title="Mark as useful"><i class="fa fa-fw fa-thumbs{% if rating_score != 1 %}-o{% endif %}-up"></i><span>Is useful</span></a></li>
             <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
             <li><a href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
           {% endwith %}
+          {# Bookmark/unbookmark #}
           {% if object|is_bookmarked:user %}
             <li><a href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
           {% else %}
             <li><a href="{% url 'cab_bookmark_add' snippet_id=object.id %}" title="Bookmark"><i class="fa fa-star-o fa-fw"></i><span>Bookmark</span></a></li>
           {% endif %}
+        {% else %}
+          {# Show up/down votes #}
+          <li><a href="#" title="Sign in to mark as useful"><i class="fa fa-fw fa-thumbs-o-up"></i><span>Is useful</span></a></li>
+          <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
+          <li><a href="#" title="Sign in to mark as not useful"><i class="fa fa-fw fa-thumbs-o-down"></i><span>Is not useful</span></a></li>
+          {# Bookmark/unbookmark #}
+          <li><a href="#" title="Sign in to bookmark"><i class="fa fa-star-o fa-fw"></i><span>Remove bookmark</span></a></li>
         {% endif %}
-        {{ object.bookmark_count }}
-    </div>
+
+        {% if object.bookmark_count > 0 %}
+          <li>{{ object.bookmark_count }}</li>
+        {% endif %}
+    </ul>
 
 </div>
 

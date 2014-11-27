@@ -71,10 +71,16 @@
         </div>
         <ul>
             <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-                        <!-- FIXME fix the slugs here to make the section active -->
+            {# FIXME fix the slugs here to make the section active #}
             <li><a{% if level_1 == 'partnering-with-us' %} class="active"{% endif %} href="{% url 'cab_snippet_list' %}">Browse</a></li>
             <li><a{% if level_1 == 'find-a-partner' %} class="active"{% endif %} href="{% url 'cab_snippet_add' %}">Submit</a></li>
         </ul>
+
+        <form class="header-search" method="get" action="/search/">
+            <label class="off-left" for="q">Search:</label>
+            <input type="search" autocomplete="off" name="q" id="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search">
+            <button type="submit"><img src="//assets.ubuntu.com/sites/ubuntu/1218/u/img/search-white.svg" alt="Search" height="28" /></button>
+        </form>
 
         <ul class="right inline">
         {% if user.is_authenticated %}
@@ -83,12 +89,6 @@
         {% else %}
             <li><a href="/openid/login/?next={{request.path}}">Sign in or register</a></li>
         {% endif %}
-        
-        <form class="header-search" method="get" action="/search/">
-            <label class="off-left" for="q">Search:</label>
-            <input type="search" autocomplete="off" name="q" id="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search">
-            <button type="submit"><img src="//assets.ubuntu.com/sites/ubuntu/1218/u/img/search-white.svg" alt="Search" height="28" /></button>
-        </form>
 
        </ul>
 

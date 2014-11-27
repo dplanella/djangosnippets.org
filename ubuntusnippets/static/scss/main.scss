@@ -3,6 +3,7 @@
 
 $ubuntu-code-color: #FDF6F2;
 $table-border-color: #dddddd;
+$vote-color: #919191;
 
 header.banner .nav-primary ul.right {
     float: right;
@@ -74,10 +75,10 @@ body.snippet-details {
             font-size: 2em;
             display: inline-block;
             padding: 5px 10px;
-            color: #919191;
+            color: $vote-color;
             text-transform: lowercase;
             &:hover {
-                color: #5e5e5e;
+                color: darken($vote-color, 20);
             }
             span {
                 display: none;
@@ -86,7 +87,7 @@ body.snippet-details {
         #score {
             font-size: 2em;
             padding: 5px 10px;
-            color: #919191;
+            color: $vote-color;
         }
-    }    
+    }
 }
