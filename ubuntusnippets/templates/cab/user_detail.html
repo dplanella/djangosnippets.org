@@ -1,4 +1,4 @@
-{% extends "base_user.html" %}
+{% extends "base_index.html" %}
 {% load cache core_tags %}
 {% block bodyclass %}user{% endblock %}
 {% load static from staticfiles %}
@@ -11,6 +11,11 @@
 
 
 {% block content %}
+
+  <div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+    <h1>Snippets by {{ author.username }}{% if months %}, last {{ months }} months{% endif %}</h1>
+      <div class="eight-col">
+
   {% if object_list %}
     <table class="snippet_list">
       <thead>
@@ -47,8 +52,12 @@
   {% else %}
     <p class="empty">No snippets posted yet.</p>
   {% endif %}
+
+</div>
+</div>
 {% endblock %}
 
+<!--
 {% block sidebar %}
   <nav class="filter">
     <h3>Filter by date</h3>
@@ -61,3 +70,4 @@
   </nav>
   <p><a rel="alternate" href="{% url 'cab_feed_author' username=author.username %}" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i>Feed of snippets by {{ author.username }}</a></p>
 {% endblock %}
+-->

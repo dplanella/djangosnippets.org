@@ -1,4 +1,4 @@
-{% extends "base_user.html" %}
+{% extends "base_index.html" %}
 
 {% block head_title %}Editing "{{ form.instance.title }}"{% endblock %}
 
@@ -14,80 +14,110 @@
     });
   </script>
 {% endblock %}
+
 {% block content %}
   {% block content_preamble %}{% endblock %}
 
-  {% if form.errors %}
-    <p class="error">Please correct the errors below:</p>
-  {% endif %}
+  <div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+    <h1>Editing "{{ form.instance.title }}"</h1>
+      <div class="eight-col">
 
-  <form class="fullsize" method="post" action="">{% csrf_token %}
-    <div class="field {% if form.title.errors %}error{% endif %}">
-      <label for="id_title">Title:</label>
-      {{ form.title }}
-      {% if form.title.errors %}<small class="error">{{ form.title.errors|join:", " }}</small>{% endif %}
-    </div>
-    <div class="field {% if form.language.errors %}error{% endif %}">
-      <label for="id_language">Language:</label>
-      {{ form.language }}
-      {% if form.language.errors %}<small class="error">{{ form.language.errors|join:", " }}</small>{% endif %}
-    </div>
-    <div class="field {% if form.version.errors %}error{% endif %}">
-      <label for="id_version">Version:</label>
-      {{ form.version }}
-      {% if form.version.errors %}<small class="error">{{ form.version.errors|join:", " }}</small>{% endif %}
-    </div>
-    <div class="field {% if form.tags.errors %}error{% endif %}">
-      <label for="id_tag_list">Tags:</label>
-      {{ form.tags }}
-      {% if form.tags.errors %}<span class="error">{{ form.tags.errors|join:", " }}</span>{% endif %}
-      <p class="help">Use commas between tag names, and hyphens for multiple words, like "tag1, tag2, tag3-with-long-name".</p>
-    </div>
-    <div class="field {% if form.code.errors %}error{% endif %}">
-      <label for="id_code">Code:</label>
-      {{ form.code }}
-      {% if form.code.errors %}<span class="error">{{ form.code.errors|join:", " }}</span>{% endif %}
-    </div>
-    <div class="field {% if form.description.errors %}error{% endif %}">
-      <label for="id_description">Description:</label>
-      {{ form.description }}
-      {% if form.description.errors %}<span class="error">{{ form.description.errors|join:", " }}</span>{% endif %}
-      <p class="help">You can use Markdown syntax here (see the sidebar), but <strong>raw HTML will be removed</strong>.</p>
-    </div>
-    <div class="button-group"><button type="submit">Save</button></div>
+
+    {% if form.errors %}
+      <p class="error">Please correct the errors below: </p>
+    {% endif %}
+
+    <form method="post" action="">{% csrf_token %}
+
+   <fieldset>
+     <ul>
+
+      <li>
+       <!-- Snippet title -->
+       <label for="id_title">Title: {% if form.title.errors %}<span class="error">{{ form.title.errors|join:", " }}</span>{% endif %}</label>
+       {{ form.title }}
+      </li>
+
+      <li>
+       <!-- Snippet code -->
+       <label for="id_code">Code: {% if form.code.errors %}<span class="error">{{ form.code.errors|join:", " }}</span>{% endif %}</label>
+       {{ form.code }}
+      </li>
+
+      <li>
+       <!-- Snippet description -->
+       <label for="id_description">Description: {% if form.description.errors %}<span class="error">{{ form.description.errors|join:", " }}</span>{% endif %}</label>
+       {{ form.description }}
+      </li>
+
+      <li>
+       <!-- Snippet language -->
+       <label for="id_language">Language: {% if form.language.errors %}<span class="error">&nbsp;&nbsp;{{ form.language.errors|join:", " }}</span>{% endif %}</label>
+       {{ form.language }}
+      </li>
+
+      <li>
+       <!-- Snippet version -->
+       <label for="id_version">Version: {% if form.version.errors %}<span class="error">&nbsp;&nbsp;{{ form.version.errors|join:", " }}</span>{% endif %}</label>
+       {{ form.version }}
+
+      <li>
+
+       <!-- Snippet tags -->
+       <label for="id_tags">Tags: {% if form.tags.errors %}<span class="error">{{ form.tags.errors|join:", " }}</span>{% endif %} </label>
+        {{ form.tags }}
+      </li>
+     </ul>
+   </fieldset>
+
+   <fieldset class="fieldset-submit">
+    <ul>
+     <li>
+      <input type="submit" value="Save" tabindex="5"> or <a href="?next={{ request.path }}">Cancel</a>
+     </li>
+    </ul>
+   </fieldset>
   </form>
-{% endblock %}
 
-{% block sidebar %}
-  <p>All fields are required; tags should be separated with spaces, and you can use Markdown in the description for your snippet, but <strong>raw HTML will be removed</strong>.</p>
+  </div>
 
-  <p>Remember: by posting a snippet, you agree to let anyone make use of the code.</p>
-  <h3>Markdown quick reference:</h3>
-  <dl>
-    <dt>Bold and italic text:</dt>
-    <dd><strong>**bold**</strong> and <em>*italic*</em> text</dd>
+  <div class="four-col last-col">
 
-    <dt>Links:</dt>
-    <dd>[link text](link URL)</dd>
+    <div class="box">
+      <ul>
+      <li>All fields are required</li>
+      <li>Separate tags with spaces</li>
+      <li>You can use Markdown in the description for your snippet, but <strong>raw HTML will be removed</strong>.</li>
+      </ul>
 
-    <dt>Code:</dt>
-    <dd><code>`code`</code></dd>
+      <h3>Markdown quick ref:</h3>
+        <dl>
+        <dt>Bold and italic text:</dt>
+        <dd><strong>**bold**</strong> and <em>*italic*</em> text</dd>
 
-    <dt>Code block:</dt>
-    <dd>Indent each line four spaces</dd>
+        <dt>Links:</dt>
+        <dd>[link text](link URL)</dd>
 
+        <dt>Code:</dt>
+        <dd><code>`code`</code></dd>
 
-    <dt>Blockquote:</dt>
-    <dd>Start each line with &gt;</dd>
+        <dt>Code block:</dt>
+        <dd>Indent each line four spaces</dd>
 
-    <dt>Unordered lists:</dt>
-    <dd>Start each item with *</dd>
+        <dt>Blockquote:</dt>
+        <dd>Start each line with &gt;</dd>
 
-    <dt>Ordered lists:</dt>
-    <dd>Start each item with a number and a period (e.g., 1. for the first item, 2. for the second, and so on)</dd>
+        <dt>Unordered lists:</dt>
+        <dd>Start each item with *</dd>
 
-    <dt></dt>
-    <dd></dd>
-  </dl>
+        <dt>Ordered lists:</dt>
+        <dd>Start each item with a number and a period (e.g., 1. for the first item, 2. for the second, and so on)</dd>
+
+        <dt></dt>
+        <dd></dd>
+      </dl>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
