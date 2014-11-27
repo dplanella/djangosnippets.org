@@ -9,6 +9,13 @@ header.banner .nav-primary ul.right {
     float: right;
 }
 
+div.snippet-image-container {
+    background: url('/assets/static/img/snippets.svg') no-repeat scroll center center transparent;
+    width: 365px;
+    height: 279px;
+    display: block;
+}
+
 body.snippet-details {
     #meta {
         margin-bottom: 20px;
@@ -87,6 +94,10 @@ body.snippet-details {
         #score {
             font-size: 2em;
             padding: 5px 10px;
+            color: $vote-color;
+        }
+        #bookmark {
+            font-size: 1em;
             color: $vote-color;
         }
     }

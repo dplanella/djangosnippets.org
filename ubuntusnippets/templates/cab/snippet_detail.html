@@ -73,7 +73,7 @@
         {% endif %}
 
         {% if object.bookmark_count > 0 %}
-          <li>{{ object.bookmark_count }}</li>
+          <li><span id="bookmark"><strong>{{ object.bookmark_count }}</strong></span></li>
         {% endif %}
     </ul>
 
@@ -112,22 +112,27 @@
 </div>
 </div>
 
-<div class="row no-border">
+<div class="row row-grey">
 <div class="twelve-col">
 
   <section id="more">
     <h2>More like this</h2>
-    {% cache 600 mlt object.pk %}
-      <ol>
+    {# % cache 600 mlt object.pk % #}
+      <ul class="no-bullets">
       {% for related in object|more_like_this:5 %}
-      <li><a href="{{ related.object.get_absolute_url }}">{{ related.object.title }}</a> by <a href="{{ related.object.author.get_absolute_url }}">{{ related.object.author.username }}</a>
-        {{ related.object.pub_date|timesince }} ago
+      <li><a href="{{ related.object.get_absolute_url }}">{{ related.object.title }}</a>
+      <span class="clearfix">by <a href="{{ related.object.author.get_absolute_url }}">{{ related.object.author.username }}</a>
+        {{ related.object.pub_date|timesince }} ago</span>
       </li>
       {% endfor %}
-      </ol>
-    {% endcache %}
+      </ul>
+    {# % endcache % #}
   </section>
+	</div>
+</div>
 
+<div class="row no-border">
+<div class="twelve-col">
   <section id="comments">
     <h2>Comments</h2>
     {% load comments %}
