@@ -43,6 +43,7 @@ body.snippet-details {
     }
     .highlight pre {
         white-space: pre;
+        word-wrap: normal;
     }
     div.highlight {
         background: $ubuntu-code-color;

@@ -446,24 +446,25 @@ body.snippet-details .highlighttable .code > div {
 /* line 44, ../scss/main.scss */
 body.snippet-details .highlight pre {
   white-space: pre;
+  word-wrap: normal;
 }
-/* line 47, ../scss/main.scss */
+/* line 48, ../scss/main.scss */
 body.snippet-details div.highlight {
   background: #fdf6f2;
 }
-/* line 50, ../scss/main.scss */
+/* line 51, ../scss/main.scss */
 body.snippet-details #actions {
   background: #dddddd;
   text-align: right;
   list-style: none;
   margin: 0;
 }
-/* line 55, ../scss/main.scss */
+/* line 56, ../scss/main.scss */
 body.snippet-details #actions li {
   display: inline-block;
   margin-bottom: 0;
 }
-/* line 59, ../scss/main.scss */
+/* line 60, ../scss/main.scss */
 body.snippet-details #actions a {
   font-size: 1.125rem;
   display: inline-block;
@@ -471,26 +472,26 @@ body.snippet-details #actions a {
   color: #919191;
   text-transform: lowercase;
 }
-/* line 65, ../scss/main.scss */
+/* line 66, ../scss/main.scss */
 body.snippet-details #actions a span {
   display: none;
 }
-/* line 68, ../scss/main.scss */
+/* line 69, ../scss/main.scss */
 body.snippet-details #actions a:hover {
   color: #5e5e5e;
 }
-/* line 73, ../scss/main.scss */
+/* line 74, ../scss/main.scss */
 body.snippet-details .vote {
   text-align: center;
   list-style: none;
   margin: 0;
 }
-/* line 77, ../scss/main.scss */
+/* line 78, ../scss/main.scss */
 body.snippet-details .vote li {
   display: inline-block;
   margin-bottom: 0;
 }
-/* line 81, ../scss/main.scss */
+/* line 82, ../scss/main.scss */
 body.snippet-details .vote a {
   font-size: 2em;
   display: inline-block;
@@ -498,21 +499,21 @@ body.snippet-details .vote a {
   color: #919191;
   text-transform: lowercase;
 }
-/* line 87, ../scss/main.scss */
+/* line 88, ../scss/main.scss */
 body.snippet-details .vote a:hover {
   color: #5e5e5e;
 }
-/* line 90, ../scss/main.scss */
+/* line 91, ../scss/main.scss */
 body.snippet-details .vote a span {
   display: none;
 }
-/* line 94, ../scss/main.scss */
+/* line 95, ../scss/main.scss */
 body.snippet-details .vote #score {
   font-size: 2em;
   padding: 5px 10px;
   color: #919191;
 }
-/* line 99, ../scss/main.scss */
+/* line 100, ../scss/main.scss */
 body.snippet-details .vote #bookmark {
   font-size: 1em;
   color: #919191;
