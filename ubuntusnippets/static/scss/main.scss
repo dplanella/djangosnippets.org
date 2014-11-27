@@ -16,6 +16,30 @@ div.snippet-image-container {
     display: block;
 }
 
+div.user-card-avatar {
+    float: left;
+    padding: 5px;
+    margin-right: 2px;
+    img {
+      // background: url('/assets/static/img/white-squircle.png') no-repeat scroll 0% 0% / 100% auto transparent;
+      border-radius: 9px;
+    }
+}
+
+.badge-snippets {
+    background: url('/assets/static/img/badge-snippets.png') no-repeat scroll left center transparent;
+    width: 12px;
+    height: 12px;
+    padding: 4px 4px 4px 0px;
+    float: left;
+}
+
+.user-profile-avatar {
+    img {
+      border-radius: 20px;
+    }
+}
+
 body.snippet-details {
     #meta {
         margin-bottom: 20px;

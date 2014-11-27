@@ -13,3 +13,4 @@ simplejson==3.6.3
 six==1.8.0
 urllib3==1.9.1
 whitenoise==1.0.3
+django-avatar==2.0

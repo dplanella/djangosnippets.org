@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" dir="ltr"> <!--<![endif]-->
 <head>
 
-  <title>ubuntusnippets: {% block head_title %}Home{% endblock %}</title>
+  <title>Ubuntu Snippets: {% block head_title %}Home{% endblock %}</title>
   <meta charset="UTF-8" />
   <meta name="description" content="{% block meta_description %}{% endblock %}" />
   <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
@@ -13,118 +13,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!--[if IE]>
-  <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
   <![endif]-->
 
   <link rel="shortcut icon" href="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" type="image/x-icon" />
-  <!-- <link type="text/plain" rel="author" href="{{ STATIC_URL }}files/humans.txt" /> -->
 
-  <!-- get ubuntu font from google -->
+  {# Get ubuntu font from google #}
   <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono' rel='stylesheet' type='text/css' />
 
-  <!-- get ubuntu guidelines css -->
+  {# Get font awesome #}
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
+
+  {# Get Ubuntu guidelines css #}
   <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/responsive/latest/ubuntu-styles.css" />
 
-  <!-- get global nav css -->
+  {#  Get global nav CSS #}
   <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/beta/global-responsive.css" />
 
-<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/main.css" />
+  {# Site-specific CSS #}
+  <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/main.css' %}" />
 
-<!-- site specific css -->
-<!--
-<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/styles.css" />
-<link rel="stylesheet" type="text/css" media="print" href="{{ STATIC_URL }}css/core-print.css" />
--->
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/ie/ie7.scss" />
-  <link rel="stylesheet" type="text/css" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-  <![endif]-->
-
-  <!-- modernizr -->
+  {# Use modernizr #}
   <!-- <script src="{{ STATIC_URL }}js/plugins/modernizr.2.7.1.js"></script> -->
-
   <script src="{% static 'js/modernizr.js' %}"></script>
 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-<!--
-  <link rel="stylesheet" href="{% static "css/main.css" %}" type="text/css" />
--->
   <link rel="alternate" href="{% url 'cab_feed_latest' %}" type="application/atom+xml" title="Feed of latest snippets" />
+
   {% block feeds %}{% endblock %}
 
-{% block head_extra %}{% endblock %}
+  {% block head_extra %}{% endblock %}
 
 </head>
 
-<body class="{% block bodyclass %}{% endblock %} {% if level_1 != "" %}{% if level_1 == '2012' %}body-{% endif %}{{ level_1 }}{% endif %}{% if level_2 %} {% if level_1 == '2012' %}body-{% endif %}{{ level_1 }}-{{ level_2 }}{% endif %}{% if level_3 %} {% if level_1 == '2012' %}body-{% endif %}{{ level_1 }}-{{ level_2 }}-{{ level_3 }} {% endif %} {% include "templates/body-class.html" %}{% if extra_body_class != "" %} {% block extra_body_class %}{% endblock %}{% endif %}" itemscope itemtype="http://schema.org/Product">
+<body class="{% block bodyclass %}{% endblock %}">
 
-<header class="banner global" role="banner">
-{% block header_banner %}
+  <header class="banner global" role="banner">
+    {% block header_banner %}
     <nav role="navigation" class="nav-primary nav-right">
-        <div class="logo">
-            <a class="logo-ubuntu" href="/">
-                <img width="106" height="25" alt="" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.svg">
-                <span>snippets</span>
-            </a>
-        </div>
-        <ul>
-            <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-            {# FIXME fix the slugs here to make the section active #}
-            <li><a{% if level_1 == 'partnering-with-us' %} class="active"{% endif %} href="{% url 'cab_snippet_list' %}">Browse</a></li>
-            <li><a{% if level_1 == 'find-a-partner' %} class="active"{% endif %} href="{% url 'cab_snippet_add' %}">Submit</a></li>
-        </ul>
+      <div class="logo">
+        <a class="logo-ubuntu" href="/">
+          <img width="106" height="25" alt="" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.svg">
+            <span>snippets</span>
+          </a>
+      </div>
+      <ul>
+        <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+        {# FIXME fix the slugs here to make the section active #}
+        <li><a{% if level_1 == 'partnering-with-us' %} class="active"{% endif %} href="{% url 'cab_snippet_list' %}">Browse</a></li>
+        <li><a{% if level_1 == 'find-a-partner' %} class="active"{% endif %} href="{% url 'cab_snippet_add' %}">Submit</a></li>
+      </ul>
 
-        <form class="header-search" method="get" action="/search/">
-            <label class="off-left" for="q">Search:</label>
-            <input type="search" autocomplete="off" name="q" id="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search">
-            <button type="submit"><img src="//assets.ubuntu.com/sites/ubuntu/1218/u/img/search-white.svg" alt="Search" height="28" /></button>
-        </form>
+      <form class="header-search" method="get" action="/search/">
+        <label class="off-left" for="q">Search:</label>
+        <input type="search" autocomplete="off" name="q" id="q" value="{% if form.q.value %}{{ form.q.value }}{% endif %}" placeholder="Search">
+        <button type="submit"><img src="//assets.ubuntu.com/sites/ubuntu/1218/u/img/search-white.svg" alt="Search" height="28" /></button>
+      </form>
 
-        <ul class="right inline">
+      <ul class="right inline">
         {% if user.is_authenticated %}
-            <li><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></li>
-            <li><a href="/logout">Sign out</a></li>
+            {% load avatar_tags %}
+            <li><a href="{{ user.get_absolute_url }}"><!--<span>{% avatar user.username 16 %}</span>-->{{ user.username }}</a></li>
+            <li><a href="/logout/?next={{request.path}}">Sign out</a></li>
         {% else %}
             <li><a href="/openid/login/?next={{request.path}}">Sign in or register</a></li>
         {% endif %}
+      </ul>
 
-       </ul>
-
-        <a href="#canonlist" class="nav-toggle no-script">☰</a>
+      <a href="#canonlist" class="nav-toggle no-script">☰</a>
     </nav>
-{% endblock header_banner %}
-</header>
+    {% endblock header_banner %}
+  </header>
 
-<div class="wrapper">
-<div id="main-content" class="inner-wrapper">
-{% if level_1 %}
-  {% block second_level_nav %}
-    {% spaceless %}{% block second_level_nav_items %}{% endblock second_level_nav_items %}{% endspaceless %}
-  {% endblock second_level_nav %}
-{% endif %}
+  <div class="wrapper">
+    <div id="main-content" class="inner-wrapper">
+      {% block header %}{% endblock %}
+      {% block content_container %}
+      {% block outer_content %}
+      {% endblock outer_content %}
+      {% endblock content_container %}
+    </div><!-- /.inner-wrapper -->
+  </div><!-- /.wrapper -->
 
-{% block header %}{% endblock %}
-{% block content_container %}
-{% block outer_content %}
-{% endblock outer_content %}
-{% endblock content_container %}
-</div><!-- /.inner-wrapper -->
+  {% include "templates/footer.html" %}
 
-</div><!-- /.wrapper -->
-
-{% include "templates/footer.html" %}
-
-<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/plugins/yui-combined.min.js"></script>
-<script>
-	if(!core){ var core = {}; }
-	core.globalPrepend = 'body';
-</script>
-<script src="//assets.ubuntu.com/sites/guidelines/js/responsive/core.js"></script>
-<!--<script src="{{ STATIC_URL }}js/scratch.js"></script> -->
-<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-<!-- <script src="{{ STATIC_URL }}js/plugins/respond.min.js"></script> -->
+  <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/plugins/yui-combined.min.js"></script>
+  <script>
+    if(!core){ var core = {}; }
+    core.globalPrepend = 'body';
+  </script>
+  <script src="//assets.ubuntu.com/sites/guidelines/js/responsive/core.js"></script>
+  <!--<script src="{{ STATIC_URL }}js/scratch.js"></script> -->
+  <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+  <!-- <script src="{% static 'js/plugins/respond.min.js' %}"></script> -->
 
 {% block footer_extra %}{% endblock %}
 

@@ -1,25 +1,40 @@
 {% extends "base_index.html" %}
 {% load static from staticfiles %}
 {% load core_tags %}
-<!--
+
 {% block bodyclass %}frontpage{% endblock %}
-{% block head_title %}Welcome{% endblock %}
+{% block head_title %}Share your code{% endblock %}
 
 {% block content_header %}Share your code{% endblock %}
--->
 
 {% block content %}
 {# Welcome text row #}
 <div class="row row-hero">
   <h1>Share your code</h1>
   <div class="seven-col">
-    <p>Welcome to the Ubuntu developer snippets site, where you can share and find useful snippets of reusable code.</p>
 
-    <p>If you're just here to browse, you can look through snippets organized <a href="/users/">by author</a>, <a href="/languages/">by language</a> or <a href="/tags/">by tag</a>. You can also have a look at the <a href="/popular/rated/">top rated snippets</a> and the <a href="/popular/bookmarked/">most popular snippets</a>.</p>
+    <p>Welcome to the Ubuntu developer snippets site,
+    where you can share and find useful snippets of reusable code.</p>
 
-    <p>If you'd like to contribute, you can sign up for a free account</a> and you'll be able to post snippets of your own, rate and bookmark snippets, and post comments.
+    <p>If you're just here to browse, you can look through snippets
+    organized <a href="/users/">by author</a>, <a href="/languages/">
+    by language</a> or <a href="/tags/">by tag</a>. You can also have a look at
+    the <a href="/popular/rated/">top rated snippets</a> and
+    the <a href="/popular/bookmarked/">most popular snippets</a>.</p>
 
-    <p class="clear seven-col"><a href="/openid/login" class="link-cta-ubuntu">Sign up</a> or <a href="/snippets">browse our snippets&nbsp;&rsaquo;</a></p>
+    <p>If you'd like to contribute, you can sign up for a free account</a>
+    and you'll be able to post snippets of your own, rate and bookmark
+    snippets, and post comments.
+
+    <p class="clear seven-col">
+      <a href="/snippets/add/" class="link-cta-ubuntu">
+        {% if user.is_authenticated %}
+          Submit a snippet
+        {% else %}
+          Sign up to submit
+        {% endif %}
+      </a> or <a href="/snippets">browse the collection&nbsp;&rsaquo;</a>
+    </p>
 
   </div>
   <div class="five-col last-col">
@@ -30,13 +45,14 @@
 <div class="row row-hero no-border vertical-divider">
   {# % load cache % #}
   {# % cache 600 homepage % #}
+  {% load avatar_tags %}
 
   <div class="four-col">
     <h3>The latest</h3>
     <ul class="no-bullets">
     {% for snippet in "cab.snippet"|latest:5 %}
       <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
-      <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li></span>
+      <span class="clearfix small note">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li></span>
     {% endfor %}
     </ul>
     <p><a rel="alternate" href="/feeds/latest/" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i> Subscribe to the latest snippets</a></p>
@@ -47,7 +63,7 @@
     <ol class="no-bullets">
     {% for snippet in "cab.snippet"|call_manager:"top_rated"|slice:":5" %}
       <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
-      <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.username }}</a></li></span>
+      <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a></li></span>
     {% endfor %}
     </ol>
   </div>
@@ -56,7 +72,20 @@
     <h3>Top users</h3>
     <ol class="no-bullets">
     {% for author in "cab.snippet"|call_manager:"top_authors"|slice:":5" %}
-      <li><a href="{{ author.get_absolute_url }}">{{ author.username }}</a></li>
+      <li>
+        <div class="user-card-small">
+          <div class="user-card-avatar">
+            <span class="image-wrap">{% avatar author.username 40 %}</span>
+          </div>
+          <div class="user-card-details">
+
+            <a href="{{ author.get_absolute_url }}">{{ author.get_full_name|default:author.username }}</a><br></br>
+            <span class="badge-snippets"></span>
+            <span class="user-snippet-count" title="{{ author.get_full_name|default:author.username }}'s snippet count"><strong>{{ author.snippet_set.count }}</strong></span>
+
+          </div>
+        </div>
+      </li>
     {% endfor %}
     </ol>
   </div>
