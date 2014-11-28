@@ -36,13 +36,56 @@ div.user-card-avatar {
     float: left;
 }
 
+.avatar-48 {
+    img {
+      border-radius: 9px;
+    }
+}
+
 .user-profile-avatar {
     img {
       border-radius: 20px;
     }
 }
 
+.content-cat {
+  a {
+      margin-left: 20px;
+    }
+}
+
 .snippet-meta {
+    span {
+      //clear: both;
+      display: block;
+      //float: left;
+      font-size: 16px;
+      margin-bottom: 0.5em;
+      width: 100%;
+      font-weight: normal;
+    }
+    li {
+      //float: left;
+      //clear: both;
+      width: 100%;
+      margin-bottom: 0px;
+      font-weight: 300;
+      font-size: 13px;
+    }
+    a {
+        font-weight: 400;
+        &:link, &:visited {
+            color: $ubuntu-text-color;
+
+        }
+        &:hover {
+            color: $ubuntu-orange-color;
+        }
+    }
+}
+
+
+.snippet-list-meta {
     span {
         a {
             &:link, &:visited {

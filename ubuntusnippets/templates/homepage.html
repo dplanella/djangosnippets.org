@@ -52,8 +52,8 @@
     <h3>The latest</h3>
     <ul class="no-bullets">
     {% for snippet in "cab.snippet"|latest:5 %}
-      <li class="snippet-meta"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
-      <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li></span>
+      <li class="snippet-list-meta"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
+      <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a>, {{ snippet.pub_date|timesince|truncatewords:2|cut:"."|cut:","  }} ago</li></span>
     {% endfor %}
     </ul>
     <p><a rel="alternate" href="/feeds/latest/" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i> Subscribe to the latest snippets</a></p>
@@ -64,7 +64,7 @@
     <h3>Top snippets</h3>
     <ol class="no-bullets">
     {% for snippet in "cab.snippet"|call_manager:"top_rated"|slice:":5" %}
-      <li class="snippet-meta"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
+      <li class="snippet-list-meta"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
       <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a></li></span>
     {% endfor %}
     </ol>
@@ -83,8 +83,8 @@
           <div class="user-card-details">
 
             <a href="{{ author.get_absolute_url }}">{{ author.get_full_name|default:author.username }}</a><br />
-            <span class="badge-snippets"></span>
-            <span class="user-snippet-count" title="{{ author.get_full_name|default:author.username }}'s snippet count"><strong>{{ author.snippet_set.count }}</strong></span>
+            <span class="badge-snippets tooltip" title="{{ author.get_full_name|default:author.username }}'s snippet count"></span>
+            <span class="user-snippet-count tooltip" title="{{ author.get_full_name|default:author.username }}'s snippet count"><strong>{{ author.snippet_set.count }}</strong></span>
 
           </div>
         </div>

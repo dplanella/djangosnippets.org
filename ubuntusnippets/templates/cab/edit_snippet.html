@@ -20,104 +20,69 @@
 
   <div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
     <h1>Editing "{{ form.instance.title }}"</h1>
-      <div class="eight-col">
+    <div class="eight-col">
 
+      {% if form.errors %}
+        <p class="error">Please correct the errors below: </p>
+      {% endif %}
 
-    {% if form.errors %}
-      <p class="error">Please correct the errors below: </p>
-    {% endif %}
+      <form method="post" action="">{% csrf_token %}
 
-    <form method="post" action="">{% csrf_token %}
+        <fieldset>
+          <ul>
+            <li>
+             <!-- Snippet title -->
+             <label for="id_title">Title: {% if form.title.errors %}<span class="error">{{ form.title.errors|join:", " }}</span>{% endif %}</label>
+             {{ form.title }}
+            </li>
 
-   <fieldset>
-     <ul>
+            <li>
+             <!-- Snippet code -->
+             <label for="id_code">Code: {% if form.code.errors %}<span class="error">{{ form.code.errors|join:", " }}</span>{% endif %}</label>
+             {{ form.code }}
+            </li>
 
-      <li>
-       <!-- Snippet title -->
-       <label for="id_title">Title: {% if form.title.errors %}<span class="error">{{ form.title.errors|join:", " }}</span>{% endif %}</label>
-       {{ form.title }}
-      </li>
+            <li>
+             <!-- Snippet description -->
+             <label for="id_description">Description: {% if form.description.errors %}<span class="error">{{ form.description.errors|join:", " }}</span>{% endif %}</label>
+             {{ form.description }}
+            </li>
 
-      <li>
-       <!-- Snippet code -->
-       <label for="id_code">Code: {% if form.code.errors %}<span class="error">{{ form.code.errors|join:", " }}</span>{% endif %}</label>
-       {{ form.code }}
-      </li>
+            <li>
+             <!-- Snippet language -->
+             <label for="id_language">Language: {% if form.language.errors %}<span class="error">&nbsp;&nbsp;{{ form.language.errors|join:", " }}</span>{% endif %}</label>
+             {{ form.language }}
+            </li>
 
-      <li>
-       <!-- Snippet description -->
-       <label for="id_description">Description: {% if form.description.errors %}<span class="error">{{ form.description.errors|join:", " }}</span>{% endif %}</label>
-       {{ form.description }}
-      </li>
+            <li>
+             <!-- Snippet version -->
+             <label for="id_version">Version: {% if form.version.errors %}<span class="error">&nbsp;&nbsp;{{ form.version.errors|join:", " }}</span>{% endif %}</label>
+             {{ form.version }}
 
-      <li>
-       <!-- Snippet language -->
-       <label for="id_language">Language: {% if form.language.errors %}<span class="error">&nbsp;&nbsp;{{ form.language.errors|join:", " }}</span>{% endif %}</label>
-       {{ form.language }}
-      </li>
+            <li>
 
-      <li>
-       <!-- Snippet version -->
-       <label for="id_version">Version: {% if form.version.errors %}<span class="error">&nbsp;&nbsp;{{ form.version.errors|join:", " }}</span>{% endif %}</label>
-       {{ form.version }}
+             <!-- Snippet tags -->
+             <label for="id_tags">Tags: {% if form.tags.errors %}<span class="error">{{ form.tags.errors|join:", " }}</span>{% endif %} </label>
+              {{ form.tags }}
+            </li>
+         </ul>
+        </fieldset>
 
-      <li>
+        <fieldset class="fieldset-submit">
+          <ul>
+            <li>
+              <input type="submit" value="Save" tabindex="5"> or <a href="{{ request.path }}?cancel=true">cancel</a>
+            </li>
+          </ul>
+        </fieldset>
+      </form>
+    </div>
 
-       <!-- Snippet tags -->
-       <label for="id_tags">Tags: {% if form.tags.errors %}<span class="error">{{ form.tags.errors|join:", " }}</span>{% endif %} </label>
-        {{ form.tags }}
-      </li>
-     </ul>
-   </fieldset>
-
-   <fieldset class="fieldset-submit">
-    <ul>
-     <li>
-      <input type="submit" value="Save" tabindex="5"> or <a href="?next={{ request.path }}">Cancel</a>
-     </li>
-    </ul>
-   </fieldset>
-  </form>
-
-  </div>
-
-  <div class="four-col last-col">
-
-    <div class="box">
-      <ul>
-      <li>All fields are required</li>
-      <li>Separate tags with spaces</li>
-      <li>You can use Markdown in the description for your snippet, but <strong>raw HTML will be removed</strong>.</li>
-      </ul>
-
-      <h3>Markdown quick ref:</h3>
-        <dl>
-        <dt>Bold and italic text:</dt>
-        <dd><strong>**bold**</strong> and <em>*italic*</em> text</dd>
-
-        <dt>Links:</dt>
-        <dd>[link text](link URL)</dd>
-
-        <dt>Code:</dt>
-        <dd><code>`code`</code></dd>
-
-        <dt>Code block:</dt>
-        <dd>Indent each line four spaces</dd>
-
-        <dt>Blockquote:</dt>
-        <dd>Start each line with &gt;</dd>
-
-        <dt>Unordered lists:</dt>
-        <dd>Start each item with *</dd>
-
-        <dt>Ordered lists:</dt>
-        <dd>Start each item with a number and a period (e.g., 1. for the first item, 2. for the second, and so on)</dd>
-
-        <dt></dt>
-        <dd></dd>
-      </dl>
+	<div class="four-col last-col">
+      <div class="box resource box-highlight">
+        {% include "_snippet_cheatsheet.html" %}
+      </div>
     </div>
   </div>
-</div>
 
 {% endblock %}

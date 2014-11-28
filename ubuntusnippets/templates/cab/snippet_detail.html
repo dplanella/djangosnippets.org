@@ -14,22 +14,49 @@
 {% block content %}
 
 {# Snippet description row #}
-<div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+<div class="row row-hero no-border equal-height">
+  {% load avatar_tags %}
+
+  {% comment "How to get the ratings count" %}
+      <!--<dt>Score:</dt>
+      <dd>{{ object.rating_score }} (after {{ object.ratings.count }} ratings)</dd>-->
+  {% endcomment %}
+
   <h1>{{ object.title }}</h1>
 
-  <div class="twelve-col">
+  {# Description and tags #}
+  <div class="nine-col">
     <div class="box" id="description">
-      <p class="smaller note snippet-meta"><span>by <a href="{{ object.author.get_absolute_url }}">{{ object.author.get_full_name|default:object.author.username }}</a>, on {{ object.pub_date|date:"F j, Y" }}. Written in <a href="{{ object.language.get_absolute_url }}">{{ object.language.name }}</a>.</span></p>
       {{ object.description_html|safe }}
       <ul class="tags">{% for tag in object.tags.all %}<li class="tag"><a href="{% url 'cab_snippet_matches_tag' tag.slug %}">{{ tag.name }}</a></li> {% endfor %}</ul>
     </div>
 
-    {% comment "How to get the ratings count" %}
-      <dt>Score:</dt>
-      <dd>{{ object.rating_score }} (after {{ object.ratings.count }} ratings)</dd>
-    {% endcomment %}
-
   </div>
+
+  {# Author and snippet metadata #}
+  <div class="three-col last-col snippet-meta">
+    <div class="">
+      <ul id="author-meta" class="no-bullets">
+        <li>
+          <a class="tooltip" title="View {{ object.author.get_short_name|default:object.author.username }}'s snippets" href="{{ object.author.get_absolute_url }}">
+            <span class="image-wrap avatar avatar-48" style="width: auto; height: auto;">{% avatar object.author.username 48 %}</span>
+          </a>
+        </li>
+        <li>
+          <a class="tooltip" title="View {{ object.author.get_short_name|default:object.author.username }}'s snippets" href="{{ object.author.get_absolute_url }}">
+            <span>{{ object.author.get_full_name|default:object.author.username }}</span>
+          </a>
+        </li>
+        <li>
+          on {{ object.pub_date|date:"F j, Y" }}.
+        </li>
+        <li>
+          Written in <a href="{{ object.language.get_absolute_url }}">{{ object.language.name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
     {# Snippet's vote controls and code #}
@@ -41,23 +68,23 @@
               {% url 'cab_snippet_rate' snippet_id=object.id as rate_url %}
               {# Vote up/down #}
               {% with object|rating_score:request.user as rating_score %}
-                <li><a href="{{ rate_url }}?score={% if rating_score == 1 %}reset{% else %}up{% endif %}" title="Mark as useful"><i class="fa fa-fw fa-thumbs{% if rating_score != 1 %}-o{% endif %}-up"></i><span>Is useful</span></a></li>
+                <li><a class="tooltip" href="{{ rate_url }}?score={% if rating_score == 1 %}reset{% else %}up{% endif %}" title="Mark as useful"><i class="fa fa-fw fa-thumbs{% if rating_score != 1 %}-o{% endif %}-up"></i><span>Is useful</span></a></li>
                 <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
-                <li><a href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
+                <li><a class="tooltip" href="{{ rate_url }}?score={% if rating_score == -1 %}reset{% else %}down{% endif %}" title="Mark as not useful"><i class="fa fa-fw fa-thumbs{% if rating_score != -1 %}-o{% endif %}-down"></i><span>Is not useful</span></a></li>
               {% endwith %}
               {# Bookmark/unbookmark #}
               {% if object|is_bookmarked:user %}
-                <li><a href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
+                <li><a class="tooltip" href="{% url 'cab_bookmark_delete' snippet_id=object.id %}" title="Remove bookmark"><i class="fa fa-star fa-fw"></i><span>Remove bookmark</span></a></li>
               {% else %}
-                <li><a href="{% url 'cab_bookmark_add' snippet_id=object.id %}" title="Bookmark"><i class="fa fa-star-o fa-fw"></i><span>Bookmark</span></a></li>
+                <li><a class="tooltip" href="{% url 'cab_bookmark_add' snippet_id=object.id %}" title="Bookmark"><i class="fa fa-star-o fa-fw"></i><span>Bookmark</span></a></li>
               {% endif %}
             {% else %}
               {# Show up/down votes #}
-              <li><a href="#" title="Sign in to mark as useful"><i class="fa fa-fw fa-thumbs-o-up"></i><span>Is useful</span></a></li>
+              <li><a class="tooltip" href="#" title="Sign in to mark as useful"><i class="fa fa-fw fa-thumbs-o-up"></i><span>Is useful</span></a></li>
               <li><span id="score"><strong>{{ object.rating_score }}</strong></span></li>
-              <li><a href="#" title="Sign in to mark as not useful"><i class="fa fa-fw fa-thumbs-o-down"></i><span>Is not useful</span></a></li>
+              <li><a class="tooltip" href="#" title="Sign in to mark as not useful"><i class="fa fa-fw fa-thumbs-o-down"></i><span>Is not useful</span></a></li>
               {# Bookmark/unbookmark #}
-              <li><a href="#" title="Sign in to bookmark"><i class="fa fa-star-o fa-fw"></i><span>Remove bookmark</span></a></li>
+              <li><a class="tooltip" href="#" title="Sign in to bookmark"><i class="fa fa-star-o fa-fw"></i><span>Remove bookmark</span></a></li>
             {% endif %}
 
             {% if object.bookmark_count > 0 %}
@@ -70,7 +97,7 @@
       <div class="eleven-col last-col">
         <ul id="actions">
           {% if user.id == object.author.id %}
-            <li><a href="{% url 'cab_snippet_edit' snippet_id=object.id %}" title="Edit"><i class="fa fa-fw fa-pencil"></i><span>Edit</span></a></li>
+            <li><a class="tooltip" href="{% url 'cab_snippet_edit' snippet_id=object.id %}" title="Edit"><i class="fa fa-fw fa-pencil"></i><span>Edit</span></a></li>
           {% endif %}
           <!--
           {% if user.is_authenticated %}
@@ -88,10 +115,10 @@
           -->
 
           {% if user.is_authenticated %}
-          <li><a class="actions__flag" href="{% url 'cab_snippet_flag' object.id %}" title="Flag this snippet"><i class="fa fa-fw fa-warning"></i><span>Flag this snippet</span></a></li>
+          <li><a class="actions__flag tooltip" href="{% url 'cab_snippet_flag' object.id %}" title="Flag this snippet"><i class="fa fa-fw fa-warning"></i><span>Flag this snippet</span></a></li>
           {% endif %}
-          <li><a href="{% url 'cab_snippet_download' snippet_id=object.id %}" type="{{ object.language.mime_type }}" title="Download"><i class="fa fa-fw fa-arrow-circle-o-down"></i><span>Download</span></a></li>
-          <li><a href="{% url 'cab_snippet_raw' snippet_id=object.id %}" title="Raw"><i class="fa fa-fw fa-align-left"></i><span>Raw</span></a></li>
+          <li><a class="tooltip" href="{% url 'cab_snippet_download' snippet_id=object.id %}" type="{{ object.language.mime_type }}" title="Download"><i class="fa fa-fw fa-arrow-circle-o-down"></i><span>Download</span></a></li>
+          <li><a class="tooltip" href="{% url 'cab_snippet_raw' snippet_id=object.id %}" title="Raw"><i class="fa fa-fw fa-align-left"></i><span>Raw</span></a></li>
         </ul>
 
 
@@ -108,7 +135,7 @@
       {# % cache 600 mlt object.pk % #}
         <ul class="no-bullets">
         {% for related in object|more_like_this:5 %}
-        <li class="snippet-meta"><a href="{{ related.object.get_absolute_url }}">{{ related.object.title }}</a>
+        <li class="snippet-list-meta"><a href="{{ related.object.get_absolute_url }}">{{ related.object.title }}</a>
         <span class="clearfix">by <a href="{{ related.object.author.get_absolute_url }}">{{ related.object.author.get_full_name|default:related.object.author.username }}</a>
           {{ related.object.pub_date|timesince }} ago</span>
         </li>

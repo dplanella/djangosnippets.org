@@ -45,13 +45,12 @@ $tag-text-hover-color: #dd4814;
     right: 0;
     top: 0;
   }
-  &:hover {
-    color: $tag-text-hover-color;
-  }
-  hover::after {
-    border-left-color: black;
-  }
-  a:link, a:visited {
-    color: $tag-text-color;
+  a {
+    &:link, &:visited {
+      color: $tag-text-color;
+    }
+    &:hover {
+      color: $tag-text-hover-color;
+    }
   }
 }

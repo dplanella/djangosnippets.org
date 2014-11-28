@@ -1,11 +1,13 @@
-{% extends "base.html" %}
+{% extends "base_index.html" %}
 
 {% block head_title %}Top authors{% endblock %}
 
-{% block content_header %}Top authors{% endblock %}
 {% block bodyclass %}simple{% endblock %}
 
 {% block content %}
+<div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
+  <h1>{% block content_header %}Top authors{% endblock %}</h1>
+  <div class="twelve-col">
   <table>
       <thead>
           <tr>
@@ -19,4 +21,6 @@
   {% endfor %}
       </tbody>
   </table>
+</div>
+</div>
 {% endblock %}

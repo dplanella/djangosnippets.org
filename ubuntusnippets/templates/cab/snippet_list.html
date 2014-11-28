@@ -10,7 +10,7 @@
 {% block content %}
 
 <div class="row row-hero no-border no-padding-bottom no-margin-bottom equal-height">
-<h1>All snippets{% if months %} last {{ months }} months{% endif %}</h1>
+<h1>{% block content_header %}All snippets{% if months %} last {{ months }} months{% endif %}{% endblock %}</h1>
 	<div class="ten-col">
 		
 

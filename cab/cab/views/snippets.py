@@ -79,7 +79,11 @@ def edit_snippet(request, snippet_id=None,
     else:
         template_name = 'cab/add_snippet.html'
         snippet = Snippet(author=request.user,
-                          language=Language.objects.get(name='Python'))
+                          language=Language.objects.get(name='QML'))
+
+    cancel = request.GET.get('cancel')
+    if cancel and cancel in ['true', '1']:
+        return redirect(snippet)
 
     if request.method == 'POST':
         form = SnippetForm(instance=snippet, data=request.POST)
