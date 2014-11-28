@@ -47,27 +47,30 @@
   {# % cache 600 homepage % #}
   {% load avatar_tags %}
 
+  {# Latest snippets #}
   <div class="four-col">
     <h3>The latest</h3>
     <ul class="no-bullets">
     {% for snippet in "cab.snippet"|latest:5 %}
-      <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
-      <span class="clearfix small note">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li></span>
+      <li class="snippet-meta"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
+      <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a> {{ snippet.pub_date|timesince }} ago</li></span>
     {% endfor %}
     </ul>
     <p><a rel="alternate" href="/feeds/latest/" type="application/atom+xml"><i class="fa fa-fw fa-rss-square"></i> Subscribe to the latest snippets</a></p>
   </div>
 
+  {# Top snippets #}
   <div class="four-col">
     <h3>Top snippets</h3>
     <ol class="no-bullets">
     {% for snippet in "cab.snippet"|call_manager:"top_rated"|slice:":5" %}
-      <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
+      <li class="snippet-meta"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> (<a href="{{ snippet.language.get_absolute_url }}">{{ snippet.language.name }}</a>)
       <span class="clearfix">by <a href="{{ snippet.author.get_absolute_url }}">{{ snippet.author.get_full_name|default:snippet.author.username }}</a></li></span>
     {% endfor %}
     </ol>
   </div>
 
+  {# Top users #}
   <div class="four-col last-col">
     <h3>Top users</h3>
     <ol class="no-bullets">
@@ -79,7 +82,7 @@
           </div>
           <div class="user-card-details">
 
-            <a href="{{ author.get_absolute_url }}">{{ author.get_full_name|default:author.username }}</a><br></br>
+            <a href="{{ author.get_absolute_url }}">{{ author.get_full_name|default:author.username }}</a><br />
             <span class="badge-snippets"></span>
             <span class="user-snippet-count" title="{{ author.get_full_name|default:author.username }}'s snippet count"><strong>{{ author.snippet_set.count }}</strong></span>
 

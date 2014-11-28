@@ -3,6 +3,7 @@ certifi==14.05.14
 dj-database-url==0.3.0
 django-allauth==0.18.0
 django-appconf==0.6
+django-avatar==2.0
 django-disqus==0.4.3
 django-openid-auth==0.5
 django-secure==1.0
@@ -13,4 +14,3 @@ simplejson==3.6.3
 six==1.8.0
 urllib3==1.9.1
 whitenoise==1.0.3
-django-avatar==2.0

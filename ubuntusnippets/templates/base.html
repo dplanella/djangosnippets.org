@@ -69,10 +69,11 @@
         <button type="submit"><img src="//assets.ubuntu.com/sites/ubuntu/1218/u/img/search-white.svg" alt="Search" height="28" /></button>
       </form>
 
+      {# Show login controls #}
       <ul class="right inline">
         {% if user.is_authenticated %}
             {% load avatar_tags %}
-            <li><a href="{{ user.get_absolute_url }}"><!--<span>{% avatar user.username 16 %}</span>-->{{ user.username }}</a></li>
+            <li><a href="{{ user.get_absolute_url }}"><!--<span>{% avatar user.username 16 %}</span>-->{{ user.get_short_name|default:user.username }}</a></li>
             <li><a href="/logout/?next={{request.path}}">Sign out</a></li>
         {% else %}
             <li><a href="/openid/login/?next={{request.path}}">Sign in or register</a></li>

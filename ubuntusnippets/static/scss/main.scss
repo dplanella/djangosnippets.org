@@ -1,6 +1,8 @@
 @import "pygments";
 @import "tags";
 
+$ubuntu-orange-color: #dd4814;
+$ubuntu-text-color: #333;
 $ubuntu-code-color: #FDF6F2;
 $table-border-color: #dddddd;
 $vote-color: #919191;
@@ -37,6 +39,19 @@ div.user-card-avatar {
 .user-profile-avatar {
     img {
       border-radius: 20px;
+    }
+}
+
+.snippet-meta {
+    span {
+        a {
+            &:link, &:visited {
+              color: $ubuntu-text-color;
+            }
+            &:hover {
+              color: $ubuntu-orange-color;
+            }
+        }
     }
 }
 

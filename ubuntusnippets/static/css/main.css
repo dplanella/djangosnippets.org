@@ -400,12 +400,12 @@ div.highlight .il {
   color: #333333;
 }
 
-/* line 8, ../scss/main.scss */
+/* line 10, ../scss/main.scss */
 header.banner .nav-primary ul.right {
   float: right;
 }
 
-/* line 12, ../scss/main.scss */
+/* line 14, ../scss/main.scss */
 div.snippet-image-container {
   background: url("/assets/static/img/snippets.svg") no-repeat scroll center center transparent;
   width: 365px;
@@ -413,18 +413,18 @@ div.snippet-image-container {
   display: block;
 }
 
-/* line 19, ../scss/main.scss */
+/* line 21, ../scss/main.scss */
 div.user-card-avatar {
   float: left;
   padding: 5px;
   margin-right: 2px;
 }
-/* line 23, ../scss/main.scss */
+/* line 25, ../scss/main.scss */
 div.user-card-avatar img {
   border-radius: 9px;
 }
 
-/* line 29, ../scss/main.scss */
+/* line 31, ../scss/main.scss */
 .badge-snippets {
   background: url("/assets/static/img/badge-snippets.png") no-repeat scroll left center transparent;
   width: 12px;
@@ -433,30 +433,39 @@ div.user-card-avatar img {
   float: left;
 }
 
-/* line 38, ../scss/main.scss */
+/* line 40, ../scss/main.scss */
 .user-profile-avatar img {
   border-radius: 20px;
 }
 
-/* line 44, ../scss/main.scss */
+/* line 48, ../scss/main.scss */
+.snippet-meta span a:link, .snippet-meta span a:visited {
+  color: #333333;
+}
+/* line 51, ../scss/main.scss */
+.snippet-meta span a:hover {
+  color: #dd4814;
+}
+
+/* line 59, ../scss/main.scss */
 body.snippet-details #meta {
   margin-bottom: 20px;
 }
-/* line 47, ../scss/main.scss */
+/* line 62, ../scss/main.scss */
 body.snippet-details .code-row {
   margin-top: 0px;
   padding-top: 0px;
 }
-/* line 51, ../scss/main.scss */
+/* line 66, ../scss/main.scss */
 body.snippet-details table {
   border-top: 0;
   table-layout: fixed;
 }
-/* line 54, ../scss/main.scss */
+/* line 69, ../scss/main.scss */
 body.snippet-details table td.linenos {
   width: 60px;
 }
-/* line 57, ../scss/main.scss */
+/* line 72, ../scss/main.scss */
 body.snippet-details table td {
   vertical-align: top;
   text-align: left;
@@ -464,32 +473,32 @@ body.snippet-details table td {
   border: 0;
   background: #fdf6f2;
 }
-/* line 65, ../scss/main.scss */
+/* line 80, ../scss/main.scss */
 body.snippet-details .highlighttable .code > div {
   overflow: auto;
 }
-/* line 68, ../scss/main.scss */
+/* line 83, ../scss/main.scss */
 body.snippet-details .highlight pre {
   white-space: pre;
   word-wrap: normal;
 }
-/* line 72, ../scss/main.scss */
+/* line 87, ../scss/main.scss */
 body.snippet-details div.highlight {
   background: #fdf6f2;
 }
-/* line 75, ../scss/main.scss */
+/* line 90, ../scss/main.scss */
 body.snippet-details #actions {
   background: #dddddd;
   text-align: right;
   list-style: none;
   margin: 0;
 }
-/* line 80, ../scss/main.scss */
+/* line 95, ../scss/main.scss */
 body.snippet-details #actions li {
   display: inline-block;
   margin-bottom: 0;
 }
-/* line 84, ../scss/main.scss */
+/* line 99, ../scss/main.scss */
 body.snippet-details #actions a {
   font-size: 1.125rem;
   display: inline-block;
@@ -497,26 +506,26 @@ body.snippet-details #actions a {
   color: #919191;
   text-transform: lowercase;
 }
-/* line 90, ../scss/main.scss */
+/* line 105, ../scss/main.scss */
 body.snippet-details #actions a span {
   display: none;
 }
-/* line 93, ../scss/main.scss */
+/* line 108, ../scss/main.scss */
 body.snippet-details #actions a:hover {
   color: #5e5e5e;
 }
-/* line 98, ../scss/main.scss */
+/* line 113, ../scss/main.scss */
 body.snippet-details .vote {
   text-align: center;
   list-style: none;
   margin: 0;
 }
-/* line 102, ../scss/main.scss */
+/* line 117, ../scss/main.scss */
 body.snippet-details .vote li {
   display: inline-block;
   margin-bottom: 0;
 }
-/* line 106, ../scss/main.scss */
+/* line 121, ../scss/main.scss */
 body.snippet-details .vote a {
   font-size: 2em;
   display: inline-block;
@@ -524,21 +533,21 @@ body.snippet-details .vote a {
   color: #919191;
   text-transform: lowercase;
 }
-/* line 112, ../scss/main.scss */
+/* line 127, ../scss/main.scss */
 body.snippet-details .vote a:hover {
   color: #5e5e5e;
 }
-/* line 115, ../scss/main.scss */
+/* line 130, ../scss/main.scss */
 body.snippet-details .vote a span {
   display: none;
 }
-/* line 119, ../scss/main.scss */
+/* line 134, ../scss/main.scss */
 body.snippet-details .vote #score {
   font-size: 2em;
   padding: 5px 10px;
   color: #919191;
 }
-/* line 124, ../scss/main.scss */
+/* line 139, ../scss/main.scss */
 body.snippet-details .vote #bookmark {
   font-size: 1em;
   color: #919191;
