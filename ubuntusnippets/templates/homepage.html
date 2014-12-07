@@ -76,7 +76,7 @@
     <ol class="no-bullets">
     {% for author in "cab.snippet"|call_manager:"top_authors"|slice:":5" %}
       <li>
-        <div class="user-card-small">
+        <div class="user-card-small clearfix">
           <div class="user-card-avatar">
             <span class="image-wrap">{% avatar author.username 40 %}</span>
           </div>
